@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2023 at 08:10 AM
+-- Generation Time: Aug 31, 2023 at 03:11 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.2.4
 
@@ -18,8 +18,36 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `mlm`
+-- Database: `mlm1`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `account_emailaddress`
+--
+
+CREATE TABLE `account_emailaddress` (
+  `id` int(11) NOT NULL,
+  `email` varchar(254) NOT NULL,
+  `verified` tinyint(1) NOT NULL,
+  `primary` tinyint(1) NOT NULL,
+  `user_id` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `account_emailconfirmation`
+--
+
+CREATE TABLE `account_emailconfirmation` (
+  `id` int(11) NOT NULL,
+  `created` datetime(6) NOT NULL,
+  `sent` datetime(6) DEFAULT NULL,
+  `key` varchar(64) NOT NULL,
+  `email_address_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -121,7 +149,276 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (57, 'Can add status_activity', 15, 'add_status_activity'),
 (58, 'Can change status_activity', 15, 'change_status_activity'),
 (59, 'Can delete status_activity', 15, 'delete_status_activity'),
-(60, 'Can view status_activity', 15, 'view_status_activity');
+(60, 'Can view status_activity', 15, 'view_status_activity'),
+(61, 'Can add emailservice', 16, 'add_emailservice'),
+(62, 'Can change emailservice', 16, 'change_emailservice'),
+(63, 'Can delete emailservice', 16, 'delete_emailservice'),
+(64, 'Can view emailservice', 16, 'view_emailservice'),
+(65, 'Can add membership', 17, 'add_membership'),
+(66, 'Can change membership', 17, 'change_membership'),
+(67, 'Can delete membership', 17, 'delete_membership'),
+(68, 'Can view membership', 17, 'view_membership'),
+(69, 'Can add user membership', 18, 'add_usermembership'),
+(70, 'Can change user membership', 18, 'change_usermembership'),
+(71, 'Can delete user membership', 18, 'delete_usermembership'),
+(72, 'Can view user membership', 18, 'view_usermembership'),
+(73, 'Can add user withdrawls', 19, 'add_userwithdrawls'),
+(74, 'Can change user withdrawls', 19, 'change_userwithdrawls'),
+(75, 'Can delete user withdrawls', 19, 'delete_userwithdrawls'),
+(76, 'Can view user withdrawls', 19, 'view_userwithdrawls'),
+(77, 'Can add withdrawsettingmodel', 20, 'add_withdrawsettingmodel'),
+(78, 'Can change withdrawsettingmodel', 20, 'change_withdrawsettingmodel'),
+(79, 'Can delete withdrawsettingmodel', 20, 'delete_withdrawsettingmodel'),
+(80, 'Can view withdrawsettingmodel', 20, 'view_withdrawsettingmodel'),
+(81, 'Can add ticket model', 21, 'add_ticketmodel'),
+(82, 'Can change ticket model', 21, 'change_ticketmodel'),
+(83, 'Can delete ticket model', 21, 'delete_ticketmodel'),
+(84, 'Can view ticket model', 21, 'view_ticketmodel'),
+(85, 'Can add verify', 22, 'add_verify'),
+(86, 'Can change verify', 22, 'change_verify'),
+(87, 'Can delete verify', 22, 'delete_verify'),
+(88, 'Can view verify', 22, 'view_verify'),
+(89, 'Can add plansmodel', 23, 'add_plansmodel'),
+(90, 'Can change plansmodel', 23, 'change_plansmodel'),
+(91, 'Can delete plansmodel', 23, 'delete_plansmodel'),
+(92, 'Can view plansmodel', 23, 'view_plansmodel'),
+(93, 'Can add association', 24, 'add_association'),
+(94, 'Can change association', 24, 'change_association'),
+(95, 'Can delete association', 24, 'delete_association'),
+(96, 'Can view association', 24, 'view_association'),
+(97, 'Can add code', 25, 'add_code'),
+(98, 'Can change code', 25, 'change_code'),
+(99, 'Can delete code', 25, 'delete_code'),
+(100, 'Can view code', 25, 'view_code'),
+(101, 'Can add nonce', 26, 'add_nonce'),
+(102, 'Can change nonce', 26, 'change_nonce'),
+(103, 'Can delete nonce', 26, 'delete_nonce'),
+(104, 'Can view nonce', 26, 'view_nonce'),
+(105, 'Can add user social auth', 27, 'add_usersocialauth'),
+(106, 'Can change user social auth', 27, 'change_usersocialauth'),
+(107, 'Can delete user social auth', 27, 'delete_usersocialauth'),
+(108, 'Can view user social auth', 27, 'view_usersocialauth'),
+(109, 'Can add partial', 28, 'add_partial'),
+(110, 'Can change partial', 28, 'change_partial'),
+(111, 'Can delete partial', 28, 'delete_partial'),
+(112, 'Can view partial', 28, 'view_partial'),
+(113, 'Can add email address', 29, 'add_emailaddress'),
+(114, 'Can change email address', 29, 'change_emailaddress'),
+(115, 'Can delete email address', 29, 'delete_emailaddress'),
+(116, 'Can view email address', 29, 'view_emailaddress'),
+(117, 'Can add email confirmation', 30, 'add_emailconfirmation'),
+(118, 'Can change email confirmation', 30, 'change_emailconfirmation'),
+(119, 'Can delete email confirmation', 30, 'delete_emailconfirmation'),
+(120, 'Can view email confirmation', 30, 'view_emailconfirmation'),
+(121, 'Can add social account', 31, 'add_socialaccount'),
+(122, 'Can change social account', 31, 'change_socialaccount'),
+(123, 'Can delete social account', 31, 'delete_socialaccount'),
+(124, 'Can view social account', 31, 'view_socialaccount'),
+(125, 'Can add social application', 32, 'add_socialapp'),
+(126, 'Can change social application', 32, 'change_socialapp'),
+(127, 'Can delete social application', 32, 'delete_socialapp'),
+(128, 'Can view social application', 32, 'view_socialapp'),
+(129, 'Can add social application token', 33, 'add_socialtoken'),
+(130, 'Can change social application token', 33, 'change_socialtoken'),
+(131, 'Can delete social application token', 33, 'delete_socialtoken'),
+(132, 'Can view social application token', 33, 'view_socialtoken'),
+(133, 'Can add newsmodel', 34, 'add_newsmodel'),
+(134, 'Can change newsmodel', 34, 'change_newsmodel'),
+(135, 'Can delete newsmodel', 34, 'delete_newsmodel'),
+(136, 'Can view newsmodel', 34, 'view_newsmodel'),
+(137, 'Can add appsettings', 35, 'add_appsettings'),
+(138, 'Can change appsettings', 35, 'change_appsettings'),
+(139, 'Can delete appsettings', 35, 'delete_appsettings'),
+(140, 'Can view appsettings', 35, 'view_appsettings'),
+(141, 'Can add user address detail', 36, 'add_useraddressdetail'),
+(142, 'Can change user address detail', 36, 'change_useraddressdetail'),
+(143, 'Can delete user address detail', 36, 'delete_useraddressdetail'),
+(144, 'Can view user address detail', 36, 'view_useraddressdetail'),
+(145, 'Can add fastrack model', 37, 'add_fastrackmodel'),
+(146, 'Can change fastrack model', 37, 'change_fastrackmodel'),
+(147, 'Can delete fastrack model', 37, 'delete_fastrackmodel'),
+(148, 'Can view fastrack model', 37, 'view_fastrackmodel'),
+(149, 'Can add levelincome', 38, 'add_levelincome'),
+(150, 'Can change levelincome', 38, 'change_levelincome'),
+(151, 'Can delete levelincome', 38, 'delete_levelincome'),
+(152, 'Can view levelincome', 38, 'view_levelincome'),
+(153, 'Can add userunlockedlevel', 39, 'add_userunlockedlevel'),
+(154, 'Can change userunlockedlevel', 39, 'change_userunlockedlevel'),
+(155, 'Can delete userunlockedlevel', 39, 'delete_userunlockedlevel'),
+(156, 'Can view userunlockedlevel', 39, 'view_userunlockedlevel'),
+(157, 'Can add user staking', 40, 'add_userstaking'),
+(158, 'Can change user staking', 40, 'change_userstaking'),
+(159, 'Can delete user staking', 40, 'delete_userstaking'),
+(160, 'Can view user staking', 40, 'view_userstaking'),
+(161, 'Can add gallaryimages', 41, 'add_gallaryimages'),
+(162, 'Can change gallaryimages', 41, 'change_gallaryimages'),
+(163, 'Can delete gallaryimages', 41, 'delete_gallaryimages'),
+(164, 'Can view gallaryimages', 41, 'view_gallaryimages'),
+(165, 'Can add ptransfer', 42, 'add_ptransfer'),
+(166, 'Can change ptransfer', 42, 'change_ptransfer'),
+(167, 'Can delete ptransfer', 42, 'delete_ptransfer'),
+(168, 'Can view ptransfer', 42, 'view_ptransfer'),
+(169, 'Can add staking roi logs', 43, 'add_stakingroilogs'),
+(170, 'Can change staking roi logs', 43, 'change_stakingroilogs'),
+(171, 'Can delete staking roi logs', 43, 'delete_stakingroilogs'),
+(172, 'Can view staking roi logs', 43, 'view_stakingroilogs'),
+(173, 'Can add farming roi logs', 44, 'add_farmingroilogs'),
+(174, 'Can change farming roi logs', 44, 'change_farmingroilogs'),
+(175, 'Can delete farming roi logs', 44, 'delete_farmingroilogs'),
+(176, 'Can view farming roi logs', 44, 'view_farmingroilogs'),
+(177, 'Can add youtubevideo', 45, 'add_youtubevideo'),
+(178, 'Can change youtubevideo', 45, 'change_youtubevideo'),
+(179, 'Can delete youtubevideo', 45, 'delete_youtubevideo'),
+(180, 'Can view youtubevideo', 45, 'view_youtubevideo'),
+(181, 'Can add cofounderclub', 46, 'add_cofounderclub'),
+(182, 'Can change cofounderclub', 46, 'change_cofounderclub'),
+(183, 'Can delete cofounderclub', 46, 'delete_cofounderclub'),
+(184, 'Can view cofounderclub', 46, 'view_cofounderclub'),
+(185, 'Can add usercofounderclub', 47, 'add_usercofounderclub'),
+(186, 'Can change usercofounderclub', 47, 'change_usercofounderclub'),
+(187, 'Can delete usercofounderclub', 47, 'delete_usercofounderclub'),
+(188, 'Can view usercofounderclub', 47, 'view_usercofounderclub'),
+(189, 'Can add businesslogs', 48, 'add_businesslogs'),
+(190, 'Can change businesslogs', 48, 'change_businesslogs'),
+(191, 'Can delete businesslogs', 48, 'delete_businesslogs'),
+(192, 'Can view businesslogs', 48, 'view_businesslogs'),
+(193, 'Can add manage roi', 49, 'add_manageroi'),
+(194, 'Can change manage roi', 49, 'change_manageroi'),
+(195, 'Can delete manage roi', 49, 'delete_manageroi'),
+(196, 'Can view manage roi', 49, 'view_manageroi');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `core_appsettings`
+--
+
+CREATE TABLE `core_appsettings` (
+  `id` bigint(20) NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `logolight` varchar(200) NOT NULL,
+  `logodart` varchar(200) NOT NULL,
+  `favicon` varchar(200) NOT NULL,
+  `aboutus` longtext NOT NULL,
+  `facebook` varchar(200) NOT NULL,
+  `twitter` varchar(200) NOT NULL,
+  `linkedin` varchar(200) NOT NULL,
+  `instagram` varchar(200) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `status` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `core_appsettings`
+--
+
+INSERT INTO `core_appsettings` (`id`, `title`, `logolight`, `logodart`, `favicon`, `aboutus`, `facebook`, `twitter`, `linkedin`, `instagram`, `email`, `status`) VALUES
+(1, 'MLM', 'logo-2.png', 'logo-1.png', 'logo-3.png', 'Giving readers a sense of who you are or what your business stands for should be your first priority. Give a clear and simple explanation of the website\'s or company\'s objective. You should mention your passion, mission, or vision here.', 'https://facebook.com', 'https://twitter.com', 'https://linkedin.com', 'https://instagram.com', '', '0'),
+(2, 'MLM', 'alp-icon.png', 'alp-icon.png', 'alp-icon.png', 'Giving readers a sense of who you are or what your business stands for should be your first priority. Give a clear and simple explanation of the website\'s or company\'s objective. You should mention your passion, mission, or vision here.', 'https://facebook.com', 'https://twitter.com', 'https://linkedin.com', 'https://instagram.com', '', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `core_businesslogs`
+--
+
+CREATE TABLE `core_businesslogs` (
+  `id` bigint(20) NOT NULL,
+  `amount` varchar(100) NOT NULL,
+  `date` varchar(100) NOT NULL,
+  `status` varchar(100) NOT NULL,
+  `child_id_id` bigint(20) NOT NULL,
+  `parent_id_id` bigint(20) NOT NULL,
+  `plan_id` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `core_cofounderclub`
+--
+
+CREATE TABLE `core_cofounderclub` (
+  `id` bigint(20) NOT NULL,
+  `club` varchar(200) NOT NULL,
+  `business` varchar(200) NOT NULL,
+  `reward` varchar(200) NOT NULL,
+  `status` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `core_cofounderclub`
+--
+
+INSERT INTO `core_cofounderclub` (`id`, `club`, `business`, `reward`, `status`) VALUES
+(1, 'Club1', '25000', '5000', '1'),
+(2, 'Club2', '50000', '10000', '1'),
+(3, 'Club3', '100000', '20000', '1'),
+(4, 'Club4', '200000', '30000', '1'),
+(5, 'Club5', '500000', '50000', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `core_emailservice`
+--
+
+CREATE TABLE `core_emailservice` (
+  `id` bigint(20) NOT NULL,
+  `service` varchar(200) NOT NULL,
+  `host` varchar(200) NOT NULL,
+  `user` varchar(200) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  `port` varchar(200) NOT NULL,
+  `status` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `core_emailservice`
+--
+
+INSERT INTO `core_emailservice` (`id`, `service`, `host`, `user`, `password`, `port`, `status`) VALUES
+(1, 'mailtrap', 'smtp-relay.brevo.com', 'shubhamboxfy@gmail.com', 'AkWbKnOYFJ7P9HMt', ' 587', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `core_gallaryimages`
+--
+
+CREATE TABLE `core_gallaryimages` (
+  `id` bigint(20) NOT NULL,
+  `imgpath` varchar(200) NOT NULL,
+  `status` varchar(100) NOT NULL,
+  `title` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `core_gallaryimages`
+--
+
+INSERT INTO `core_gallaryimages` (`id`, `imgpath`, `status`, `title`) VALUES
+(1, 'img-1.jpg', '1', 'The calendar may say spring, but a cool breeze through your open window makes a lightweight throw blanket a must-have.\r\nThe calendar may say spring, but a cool breeze through your open window makes a lightweight throw blanket a must-have.'),
+(2, 'img-7.jpg', '1', 'The calendar may say spring, but a cool breeze through your open window makes a lightweight throw blanket a must-have.'),
+(3, 'img-4.jpg', '1', 'The calendar may say spring, but a cool breeze through your open window makes a lightweight throw blanket a must-have.'),
+(4, 'avatar-10.jpg', '1', 'The calendar may say spring, but a cool breeze through your open window makes a lightweight throw blanket a must-have.'),
+(5, 'avatar-8.jpg', '1', 'ksjlf dsfjal ksajfll; sfjlsd               ');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `core_levelincome`
+--
+
+CREATE TABLE `core_levelincome` (
+  `id` bigint(20) NOT NULL,
+  `level_income` varchar(200) NOT NULL,
+  `child_id_id` bigint(20) NOT NULL,
+  `level_id` bigint(20) NOT NULL,
+  `parent_id_id` bigint(20) NOT NULL,
+  `date` varchar(100) NOT NULL,
+  `status` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -133,8 +430,92 @@ CREATE TABLE `core_login_history` (
   `id` bigint(20) NOT NULL,
   `login_time` varchar(200) NOT NULL,
   `logout_time` varchar(200) NOT NULL,
-  `user_id` bigint(20) NOT NULL
+  `user_id` bigint(20) NOT NULL,
+  `city` varchar(200) NOT NULL,
+  `country` varchar(200) NOT NULL,
+  `ip_location` varchar(200) NOT NULL,
+  `region` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `core_membership`
+--
+
+CREATE TABLE `core_membership` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `refferal_commision` varchar(200) NOT NULL,
+  `points` varchar(200) NOT NULL,
+  `status` varchar(200) NOT NULL,
+  `plan_id` bigint(20) NOT NULL,
+  `directincomepercent` varchar(200) NOT NULL,
+  `max_amount` varchar(100) DEFAULT NULL,
+  `min_amount` varchar(100) NOT NULL,
+  `plan_period` varchar(100) DEFAULT NULL,
+  `roi` varchar(200) NOT NULL,
+  `roi_period` varchar(200) NOT NULL,
+  `staking` varchar(100) NOT NULL,
+  `overall_roi` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `core_membership`
+--
+
+INSERT INTO `core_membership` (`id`, `name`, `refferal_commision`, `points`, `status`, `plan_id`, `directincomepercent`, `max_amount`, `min_amount`, `plan_period`, `roi`, `roi_period`, `staking`, `overall_roi`) VALUES
+(12, 'micro', '0', '20', '1', 4, '50', '249', '50', NULL, '0.25', '1', 'False', '200'),
+(13, 'mini', '0', '20', '1', 4, '50', '499', '250', NULL, '0.30', '1', 'False', '200'),
+(14, 'classic', '0', '20', '1', 4, '50', '', '500', NULL, '0.5', '1', 'False', '200'),
+(15, 'First', '0', '20', '1', 5, '50', '10000', '50', '12', '3', '1', 'True', '0'),
+(16, 'second', '0', '20', '1', 5, '50', '10000', '50', '24', '4', '1', 'True', '0'),
+(17, 'Third', '0', '20', '1', 5, '50', '10000', '50', '36', '4', '1', 'True', '0'),
+(18, 'Forth', '0', '20', '1', 5, '50', '10000', '50', '36', '5', '1', 'True', '0'),
+(19, 'Fifth', '0', '20', '1', 5, '50', '10000', '50', '48', '6', '1', 'True', '0'),
+(20, 'Sixth', '0', '20', '1', 5, '50', '10000', '50', '60', '8', '1', 'True', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `core_newsmodel`
+--
+
+CREATE TABLE `core_newsmodel` (
+  `id` bigint(20) NOT NULL,
+  `news` varchar(200) NOT NULL,
+  `date` varchar(100) NOT NULL,
+  `status` varchar(200) NOT NULL,
+  `datato` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `core_newsmodel`
+--
+
+INSERT INTO `core_newsmodel` (`id`, `news`, `date`, `status`, `datato`) VALUES
+(1, 'hello', '2023-08-03', 'True', '2023-08-16'),
+(2, 'hello how are you', '2023-08-21', 'True', '2023-08-29');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `core_plansmodel`
+--
+
+CREATE TABLE `core_plansmodel` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `status` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `core_plansmodel`
+--
+
+INSERT INTO `core_plansmodel` (`id`, `name`, `status`) VALUES
+(4, 'Farming Package', '1'),
+(5, 'staking', '1');
 
 -- --------------------------------------------------------
 
@@ -150,13 +531,127 @@ CREATE TABLE `core_status_activity` (
   `user_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `core_status_activity`
+-- Table structure for table `core_ticketmodel`
 --
 
-INSERT INTO `core_status_activity` (`id`, `time`, `status`, `amount_freezed`, `user_id`) VALUES
-(1, '2023-07-13 06:02:52.891078', '0', '0', 31),
-(2, '2023-07-13 06:02:52.891078', '1', '0', 31);
+CREATE TABLE `core_ticketmodel` (
+  `id` bigint(20) NOT NULL,
+  `question` longtext NOT NULL,
+  `answer` longtext NOT NULL,
+  `status` varchar(200) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `date` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `core_useraddressdetail`
+--
+
+CREATE TABLE `core_useraddressdetail` (
+  `id` bigint(20) NOT NULL,
+  `address` varchar(200) NOT NULL,
+  `pincode` varchar(200) NOT NULL,
+  `district` varchar(200) NOT NULL,
+  `state` varchar(200) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `country` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `core_usercofounderclub`
+--
+
+CREATE TABLE `core_usercofounderclub` (
+  `id` bigint(20) NOT NULL,
+  `status` varchar(100) NOT NULL,
+  `club_id` bigint(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `date` varchar(200) NOT NULL,
+  `reward_recieved` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `core_userunlockedlevel`
+--
+
+CREATE TABLE `core_userunlockedlevel` (
+  `id` bigint(20) NOT NULL,
+  `level_id` bigint(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `status` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `core_userwithdrawls`
+--
+
+CREATE TABLE `core_userwithdrawls` (
+  `id` bigint(20) NOT NULL,
+  `status` varchar(200) NOT NULL,
+  `amount` varchar(200) NOT NULL,
+  `currency` varchar(200) NOT NULL,
+  `address` varchar(200) DEFAULT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `wallet_id` bigint(20) NOT NULL,
+  `type` varchar(200) NOT NULL,
+  `date` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `core_withdrawsettingmodel`
+--
+
+CREATE TABLE `core_withdrawsettingmodel` (
+  `id` bigint(20) NOT NULL,
+  `min_amount` varchar(200) NOT NULL,
+  `fees` varchar(200) NOT NULL,
+  `max_amount` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `core_withdrawsettingmodel`
+--
+
+INSERT INTO `core_withdrawsettingmodel` (`id`, `min_amount`, `fees`, `max_amount`) VALUES
+(1, '5', '20', '100');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `core_youtubevideo`
+--
+
+CREATE TABLE `core_youtubevideo` (
+  `id` bigint(20) NOT NULL,
+  `videolink` varchar(200) NOT NULL,
+  `status` varchar(100) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `sequence` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `core_youtubevideo`
+--
+
+INSERT INTO `core_youtubevideo` (`id`, `videolink`, `status`, `type`, `sequence`) VALUES
+(1, 'https://www.youtube.com/embed/45BNUfZRfoQ?si=5nkUAOfdfhxie4U7\"', '1', '1', '0'),
+(2, 'https://www.youtube.com/embed/45BNUfZRfoQ?si=5nkUAOfdfhxie4U7\"', '1', '2', '1'),
+(3, 'https://www.youtube.com/embed/45BNUfZRfoQ?si=5nkUAOfdfhxie4U7\"', '1', '2', '1'),
+(4, 'https://www.youtube.com/embed/FewUSkeDNnc?si=tsye_wuYsmUhXuqm\"', '1', '2', '3');
 
 -- --------------------------------------------------------
 
@@ -170,87 +665,6 @@ CREATE TABLE `current_level` (
   `points` varchar(200) NOT NULL,
   `user_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `current_level`
---
-
-INSERT INTO `current_level` (`id`, `level_id`, `points`, `user_id`) VALUES
-(1, '0', '0', 1),
-(26, '0', '0', 29),
-(27, '2', '50', 31),
-(28, '1', '10', 32),
-(29, '1', '10', 33),
-(30, '1', '10', 34),
-(31, '1', '10', 35),
-(32, '1', '10', 36),
-(33, '0', '0', 37),
-(34, '0', '0', 39),
-(35, '0', '0', 40),
-(36, '0', '0', 41),
-(37, '0', '0', 43),
-(40, '0', '0', 47),
-(41, '0', '0', 48),
-(42, '0', '0', 49),
-(43, '0', '0', 50),
-(44, '0', '0', 51),
-(45, '0', '0', 52),
-(46, '0', '0', 53),
-(47, '0', '0', 54),
-(48, '0', '0', 55),
-(49, '0', '0', 56),
-(50, '0', '0', 57),
-(51, '0', '0', 58),
-(52, '0', '0', 59),
-(53, '0', '0', 60),
-(54, '0', '0', 61),
-(55, '0', '0', 62),
-(56, '0', '0', 63),
-(57, '0', '0', 64),
-(58, '0', '0', 65),
-(59, '0', '0', 66),
-(60, '0', '0', 67),
-(61, '0', '0', 68),
-(62, '0', '0', 69),
-(63, '0', '0', 70),
-(64, '0', '0', 71),
-(65, '0', '0', 72),
-(66, '0', '0', 73),
-(67, '0', '0', 74),
-(68, '0', '0', 75),
-(69, '0', '0', 76),
-(70, '0', '0', 77),
-(71, '0', '0', 78),
-(72, '0', '0', 79),
-(73, '0', '0', 80),
-(74, '0', '0', 81),
-(75, '0', '0', 82),
-(76, '0', '0', 83),
-(77, '0', '0', 84),
-(78, '0', '0', 85),
-(79, '0', '0', 86),
-(80, '0', '0', 87),
-(81, '0', '0', 88),
-(82, '0', '0', 89),
-(83, '0', '0', 90),
-(84, '0', '0', 91),
-(85, '0', '0', 92),
-(86, '0', '0', 93),
-(87, '0', '0', 94),
-(88, '0', '0', 95),
-(89, '0', '0', 96),
-(90, '0', '0', 97),
-(91, '0', '0', 98),
-(92, '0', '0', 99),
-(93, '0', '0', 100),
-(94, '0', '0', 101),
-(95, '0', '0', 102),
-(96, '0', '0', 103),
-(97, '0', '0', 104),
-(98, '0', '0', 105),
-(99, '0', '0', 106),
-(100, '0', '0', 107),
-(101, '0', '0', 108);
 
 -- --------------------------------------------------------
 
@@ -286,21 +700,55 @@ CREATE TABLE `django_content_type` (
 --
 
 INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
+(29, 'account', 'emailaddress'),
+(30, 'account', 'emailconfirmation'),
 (1, 'admin', 'logentry'),
 (3, 'auth', 'group'),
 (2, 'auth', 'permission'),
 (4, 'contenttypes', 'contenttype'),
+(35, 'core', 'appsettings'),
+(48, 'core', 'businesslogs'),
+(46, 'core', 'cofounderclub'),
 (14, 'core', 'current_level'),
+(16, 'core', 'emailservice'),
+(44, 'core', 'farmingroilogs'),
+(37, 'core', 'fastrackmodel'),
+(41, 'core', 'gallaryimages'),
+(38, 'core', 'levelincome'),
 (7, 'core', 'levels'),
 (13, 'core', 'login_history'),
+(49, 'core', 'manageroi'),
+(17, 'core', 'membership'),
+(34, 'core', 'newsmodel'),
+(23, 'core', 'plansmodel'),
+(42, 'core', 'ptransfer'),
 (8, 'core', 'rank'),
+(43, 'core', 'stakingroilogs'),
 (15, 'core', 'status_activity'),
+(21, 'core', 'ticketmodel'),
 (12, 'core', 'transactions'),
 (6, 'core', 'user'),
+(36, 'core', 'useraddressdetail'),
+(47, 'core', 'usercofounderclub'),
+(18, 'core', 'usermembership'),
 (11, 'core', 'userrank'),
 (10, 'core', 'userreferral'),
+(40, 'core', 'userstaking'),
+(39, 'core', 'userunlockedlevel'),
+(19, 'core', 'userwithdrawls'),
 (9, 'core', 'wallet'),
-(5, 'sessions', 'session');
+(20, 'core', 'withdrawsettingmodel'),
+(45, 'core', 'youtubevideo'),
+(5, 'sessions', 'session'),
+(31, 'socialaccount', 'socialaccount'),
+(32, 'socialaccount', 'socialapp'),
+(33, 'socialaccount', 'socialtoken'),
+(24, 'social_django', 'association'),
+(25, 'social_django', 'code'),
+(26, 'social_django', 'nonce'),
+(28, 'social_django', 'partial'),
+(27, 'social_django', 'usersocialauth'),
+(22, 'userapp', 'verify');
 
 -- --------------------------------------------------------
 
@@ -344,7 +792,151 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (22, 'core', '0003_alter_user_created_at_alter_user_referal_code_and_more', '2023-07-10 04:39:48.717587'),
 (23, 'core', '0004_alter_user_created_at_alter_user_referal_code_and_more', '2023-07-10 04:48:08.066752'),
 (24, 'core', '0005_userrank_points_alter_user_created_at_and_more', '2023-07-10 07:59:33.197947'),
-(25, 'core', '0006_alter_user_created_at_alter_user_updated_at_and_more', '2023-07-13 05:45:46.934449');
+(25, 'core', '0006_alter_user_created_at_alter_user_updated_at_and_more', '2023-07-13 05:45:46.934449'),
+(26, 'core', '0007_emailservice_alter_status_activity_time_and_more', '2023-07-13 07:04:41.939129'),
+(27, 'core', '0008_emailservice_status_alter_status_activity_time_and_more', '2023-07-13 07:05:23.383478'),
+(28, 'core', '0009_alter_emailservice_service_and_more', '2023-07-13 07:42:06.824628'),
+(29, 'core', '0010_user_member_plan_alter_status_activity_time_and_more', '2023-07-13 10:51:46.872198'),
+(30, 'core', '0011_alter_status_activity_time_alter_user_created_at_and_more', '2023-07-13 10:53:53.897649'),
+(31, 'core', '0012_user_activation_date_alter_status_activity_time_and_more', '2023-07-13 10:55:47.260430'),
+(32, 'core', '0013_user_paid_members_alter_status_activity_time_and_more', '2023-07-13 11:12:34.663650'),
+(33, 'core', '0014_alter_status_activity_time_alter_user_created_at_and_more', '2023-07-13 11:12:52.877110'),
+(34, 'core', '0015_membership_alter_status_activity_time_and_more', '2023-07-13 11:37:32.571834'),
+(35, 'core', '0016_membership_refferal_commision_and_more', '2023-07-13 11:54:28.696723'),
+(36, 'core', '0017_alter_status_activity_time_alter_user_created_at_and_more', '2023-07-14 04:18:09.708013'),
+(37, 'core', '0018_withdrawsettingmodel_alter_status_activity_time_and_more', '2023-07-14 04:48:56.505884'),
+(38, 'core', '0019_alter_status_activity_time_alter_user_created_at_and_more', '2023-07-14 05:04:09.014936'),
+(39, 'core', '0020_membership_points_alter_status_activity_time_and_more', '2023-07-14 05:11:46.807161'),
+(40, 'core', '0021_membership_status_alter_status_activity_time_and_more', '2023-07-14 05:37:46.332026'),
+(41, 'core', '0022_usermembership_date_alter_status_activity_time_and_more', '2023-07-14 05:55:23.951092'),
+(42, 'core', '0023_remove_withdrawsettingmodel_currency_and_more', '2023-07-14 07:23:59.622543'),
+(43, 'core', '0024_alter_status_activity_time_alter_user_created_at_and_more', '2023-07-14 07:30:59.684170'),
+(44, 'core', '0025_alter_status_activity_time_alter_user_created_at_and_more', '2023-07-14 07:30:59.740592'),
+(45, 'core', '0026_alter_status_activity_time_alter_user_created_at_and_more', '2023-07-14 07:46:05.649175'),
+(46, 'core', '0027_alter_status_activity_time_alter_user_created_at_and_more', '2023-07-14 07:47:48.886490'),
+(47, 'core', '0028_delete_withdrawsettingmodel_and_more', '2023-07-14 07:52:14.292788'),
+(48, 'core', '0029_withdrawsettingmodel_alter_status_activity_time_and_more', '2023-07-14 07:53:56.930143'),
+(49, 'core', '0030_alter_status_activity_time_alter_user_created_at_and_more', '2023-07-14 07:55:30.822166'),
+(50, 'core', '0031_alter_status_activity_time_alter_user_created_at_and_more', '2023-07-14 07:56:21.553718'),
+(51, 'core', '0032_alter_status_activity_time_alter_user_created_at_and_more', '2023-07-14 07:56:29.679372'),
+(52, 'core', '0033_alter_status_activity_time_alter_user_created_at_and_more', '2023-07-14 07:56:49.030341'),
+(53, 'core', '0034_alter_status_activity_time_alter_user_created_at_and_more', '2023-07-14 07:57:16.913433'),
+(54, 'core', '0035_withdrawsettingmodel_max_amount_and_more', '2023-07-14 07:58:19.196518'),
+(55, 'core', '0036_ticketmodel_title_alter_status_activity_time_and_more', '2023-07-14 11:18:23.711904'),
+(56, 'core', '0037_alter_status_activity_time_alter_ticketmodel_answer_and_more', '2023-07-14 11:23:59.441998'),
+(57, 'core', '0038_remove_user_member_plan_alter_status_activity_time_and_more', '2023-07-15 11:03:27.105992'),
+(58, 'core', '0039_user_phone_no_alter_status_activity_time_and_more', '2023-07-20 11:35:33.546736'),
+(59, 'core', '0040_alter_status_activity_time_alter_user_created_at_and_more', '2023-07-21 04:57:35.351861'),
+(60, 'userapp', '0001_initial', '2023-07-21 04:57:35.486718'),
+(61, 'core', '0041_remove_transactions_transactions_transactions_amount_and_more', '2023-07-24 05:15:18.115622'),
+(62, 'core', '0042_transactions_address_transactions_type_and_more', '2023-07-24 05:22:37.027442'),
+(63, 'core', '0043_login_history_city_login_history_country_and_more', '2023-07-24 08:32:35.945840'),
+(64, 'core', '0044_plansmodel_alter_status_activity_time_and_more', '2023-07-26 05:36:03.999522'),
+(65, 'core', '0045_membership_plan_id_alter_status_activity_time_and_more', '2023-07-26 05:37:49.989775'),
+(66, 'core', '0046_alter_status_activity_time_alter_user_created_at_and_more', '2023-07-29 09:38:45.032360'),
+(67, 'default', '0001_initial', '2023-07-29 09:38:45.305661'),
+(68, 'social_auth', '0001_initial', '2023-07-29 09:38:45.309167'),
+(69, 'default', '0002_add_related_name', '2023-07-29 09:38:45.327119'),
+(70, 'social_auth', '0002_add_related_name', '2023-07-29 09:38:45.330110'),
+(71, 'default', '0003_alter_email_max_length', '2023-07-29 09:38:45.355490'),
+(72, 'social_auth', '0003_alter_email_max_length', '2023-07-29 09:38:45.357652'),
+(73, 'default', '0004_auto_20160423_0400', '2023-07-29 09:38:45.375915'),
+(74, 'social_auth', '0004_auto_20160423_0400', '2023-07-29 09:38:45.378729'),
+(75, 'social_auth', '0005_auto_20160727_2333', '2023-07-29 09:38:45.404784'),
+(76, 'social_django', '0006_partial', '2023-07-29 09:38:45.454158'),
+(77, 'social_django', '0007_code_timestamp', '2023-07-29 09:38:45.509891'),
+(78, 'social_django', '0008_partial_timestamp', '2023-07-29 09:38:45.562226'),
+(79, 'social_django', '0009_auto_20191118_0520', '2023-07-29 09:38:45.645639'),
+(80, 'social_django', '0010_uid_db_index', '2023-07-29 09:38:45.705084'),
+(81, 'social_django', '0011_alter_id_fields', '2023-07-29 09:38:45.967481'),
+(82, 'social_django', '0002_add_related_name', '2023-07-29 09:38:45.975594'),
+(83, 'social_django', '0001_initial', '2023-07-29 09:38:45.982734'),
+(84, 'social_django', '0005_auto_20160727_2333', '2023-07-29 09:38:45.986227'),
+(85, 'social_django', '0003_alter_email_max_length', '2023-07-29 09:38:45.989225'),
+(86, 'social_django', '0004_auto_20160423_0400', '2023-07-29 09:38:45.991224'),
+(87, 'account', '0001_initial', '2023-07-29 10:13:02.275341'),
+(88, 'account', '0002_email_max_length', '2023-07-29 10:13:02.313838'),
+(89, 'socialaccount', '0001_initial', '2023-07-29 10:13:02.615868'),
+(90, 'socialaccount', '0002_token_max_lengths', '2023-07-29 10:13:02.692346'),
+(91, 'socialaccount', '0003_extra_data_default_dict', '2023-07-29 10:13:02.739183'),
+(92, 'core', '0047_newsmodel_alter_status_activity_time_and_more', '2023-08-02 05:14:35.370863'),
+(93, 'core', '0048_newsmodel_datato_alter_newsmodel_date_and_more', '2023-08-02 05:23:38.736643'),
+(94, 'core', '0049_appsettings_alter_newsmodel_date_and_more', '2023-08-03 09:35:10.504275'),
+(95, 'core', '0050_alter_newsmodel_date_alter_status_activity_time_and_more', '2023-08-03 11:48:14.986323'),
+(96, 'core', '0051_alter_appsettings_aboutus_alter_newsmodel_date_and_more', '2023-08-03 11:58:33.989770'),
+(97, 'core', '0052_alter_newsmodel_date_alter_status_activity_time_and_more', '2023-08-04 06:13:38.108602'),
+(98, 'core', '0053_useraddressdetail_country_alter_newsmodel_date_and_more', '2023-08-04 06:15:20.751118'),
+(99, 'core', '0054_membership_directincomepercent_alter_newsmodel_date_and_more', '2023-08-04 07:45:04.389009'),
+(100, 'core', '0055_levels_fifthpoints_levels_forthpoints_and_more', '2023-08-04 08:15:55.855202'),
+(101, 'core', '0056_alter_newsmodel_date_alter_status_activity_time_and_more', '2023-08-04 10:42:04.569555'),
+(102, 'core', '0057_usermembership_status_alter_newsmodel_date_and_more', '2023-08-05 06:14:02.945151'),
+(103, 'core', '0058_wallet_reserved_balance_alter_newsmodel_date_and_more', '2023-08-05 10:47:39.476782'),
+(104, 'core', '0059_alter_newsmodel_date_alter_status_activity_time_and_more', '2023-08-05 10:56:07.835004'),
+(105, 'core', '0060_userreferral_refferal_income_alter_newsmodel_date_and_more', '2023-08-05 10:59:01.677275'),
+(106, 'core', '0061_alter_newsmodel_date_alter_status_activity_time_and_more', '2023-08-05 11:13:28.471577'),
+(107, 'core', '0062_alter_newsmodel_date_alter_status_activity_time_and_more', '2023-08-05 11:24:29.407995'),
+(108, 'core', '0063_rename_refferal_income_levelincome_level_income_and_more', '2023-08-05 11:27:26.902675'),
+(109, 'core', '0064_levels_plan_id_alter_newsmodel_date_and_more', '2023-08-05 12:11:58.366768'),
+(110, 'core', '0065_remove_levels_plan_id_alter_newsmodel_date_and_more', '2023-08-05 12:13:49.540790'),
+(111, 'core', '0066_fastrackmodel_income_alter_newsmodel_date_and_more', '2023-08-07 06:33:23.891495'),
+(112, 'core', '0067_alter_newsmodel_date_alter_status_activity_time_and_more', '2023-08-07 06:33:30.834733'),
+(113, 'core', '0068_fastrackmodel_status_alter_newsmodel_date_and_more', '2023-08-07 06:40:37.759568'),
+(114, 'core', '0069_fastrackmodel_right_child_and_more', '2023-08-07 06:55:00.499281'),
+(115, 'core', '0070_alter_newsmodel_date_alter_status_activity_time_and_more', '2023-08-07 07:03:18.727520'),
+(116, 'core', '0071_remove_fastrackmodel_left_child_and_more', '2023-08-07 07:05:27.610306'),
+(117, 'core', '0072_fastrackmodel_left_child_fastrackmodel_right_child_and_more', '2023-08-07 07:05:56.599335'),
+(118, 'core', '0073_alter_newsmodel_date_alter_status_activity_time_and_more', '2023-08-07 07:13:50.299134'),
+(119, 'core', '0074_alter_newsmodel_date_alter_status_activity_time_and_more', '2023-08-07 07:18:22.082972'),
+(120, 'core', '0075_fastrackmodel_plan_id_alter_newsmodel_date_and_more', '2023-08-07 08:08:40.756359'),
+(121, 'core', '0076_alter_newsmodel_date_alter_status_activity_time_and_more', '2023-08-07 08:27:00.625026'),
+(122, 'core', '0077_ticketmodel_date_alter_newsmodel_date_and_more', '2023-08-08 10:10:13.563289'),
+(123, 'core', '0078_remove_membership_amount_membership_max_amount_and_more', '2023-08-11 12:21:12.524390'),
+(124, 'core', '0079_membership_overall_roi_alter_newsmodel_date_and_more', '2023-08-11 12:35:20.677361'),
+(125, 'core', '0080_usermembership_roi_recieved_alter_newsmodel_date_and_more', '2023-08-14 07:06:07.910023'),
+(126, 'core', '0081_remove_levels_fifthpoints_remove_levels_forthpoints_and_more', '2023-08-16 05:09:25.773937'),
+(127, 'core', '0082_alter_newsmodel_date_alter_status_activity_time_and_more', '2023-08-16 06:17:43.854704'),
+(128, 'core', '0083_userstaking_roi_recieved_alter_newsmodel_date_and_more', '2023-08-16 06:27:19.206592'),
+(129, 'core', '0084_appsettings_status_alter_newsmodel_date_and_more', '2023-08-19 06:45:57.869475'),
+(130, 'core', '0085_gallaryimages_alter_newsmodel_date_and_more', '2023-08-19 12:13:12.499545'),
+(131, 'core', '0086_alter_newsmodel_date_alter_status_activity_time_and_more', '2023-08-20 12:05:53.244818'),
+(132, 'core', '0087_userwithdrawls_type_alter_newsmodel_date_and_more', '2023-08-20 12:38:25.554183'),
+(133, 'core', '0088_userwithdrawls_date_alter_newsmodel_date_and_more', '2023-08-20 13:34:57.792780'),
+(134, 'core', '0089_transactions_user_id_alter_newsmodel_date_and_more', '2023-08-20 14:43:49.243812'),
+(135, 'core', '0090_alter_newsmodel_date_alter_status_activity_time_and_more', '2023-08-20 14:52:36.141155'),
+(136, 'core', '0091_alter_newsmodel_date_alter_ptransfer_date_and_more', '2023-08-20 14:53:40.984782'),
+(137, 'core', '0092_alter_newsmodel_date_alter_ptransfer_date_and_more', '2023-08-21 05:45:43.301736'),
+(138, 'core', '0093_youtubevideo_alter_farmingroilogs_date_and_more', '2023-08-22 05:03:41.791185'),
+(139, 'core', '0094_farmingroilogs_roi_alter_farmingroilogs_date_and_more', '2023-08-22 07:59:58.279261'),
+(140, 'core', '0095_ptransfer_currency_alter_farmingroilogs_date_and_more', '2023-08-23 13:13:37.383677'),
+(141, 'core', '0096_remove_rank_points_rank_business_required_rank_image_and_more', '2023-08-24 04:53:06.427693'),
+(142, 'core', '0097_rank_status_alter_farmingroilogs_date_and_more', '2023-08-24 05:03:35.249526'),
+(143, 'core', '0098_cofounderclub_alter_farmingroilogs_date_and_more', '2023-08-24 06:10:54.707293'),
+(144, 'core', '0099_usercofounderclub_date_alter_farmingroilogs_date_and_more', '2023-08-24 06:17:44.642557'),
+(145, 'core', '0100_alter_cofounderclub_club_alter_cofounderclub_status_and_more', '2023-08-24 06:43:08.028627'),
+(146, 'core', '0101_userrank_status_alter_farmingroilogs_date_and_more', '2023-08-24 07:00:31.284959'),
+(147, 'core', '0102_userrank_overallbusiness_alter_farmingroilogs_date_and_more', '2023-08-24 07:04:38.297866'),
+(148, 'core', '0103_userrank_date_alter_farmingroilogs_date_and_more', '2023-08-24 07:16:47.627704'),
+(149, 'core', '0104_userunlockedlevel_plan_id_userunlockedlevel_status_and_more', '2023-08-24 11:06:06.136193'),
+(150, 'core', '0105_remove_userunlockedlevel_plan_id_and_more', '2023-08-24 11:37:29.368863'),
+(151, 'core', '0106_user_business_alter_farmingroilogs_date_and_more', '2023-08-26 05:23:40.040408'),
+(152, 'core', '0107_alter_farmingroilogs_date_alter_newsmodel_date_and_more', '2023-08-26 05:33:01.583619'),
+(153, 'core', '0108_levelincome_date_alter_farmingroilogs_date_and_more', '2023-08-26 05:44:31.199512'),
+(154, 'core', '0109_remove_userrank_overallbusiness_and_more', '2023-08-26 06:07:58.495868'),
+(155, 'core', '0110_alter_businesslogs_date_alter_farmingroilogs_date_and_more', '2023-08-26 06:09:55.896265'),
+(156, 'core', '0111_remove_usercofounderclub_reward_recieved_and_more', '2023-08-26 06:42:32.839526'),
+(157, 'core', '0112_usercofounderclub_reward_recieved_and_more', '2023-08-26 06:44:29.898006'),
+(158, 'core', '0113_userrank_income_alter_businesslogs_date_and_more', '2023-08-26 06:52:58.516902'),
+(159, 'core', '0114_levelincome_status_alter_businesslogs_date_and_more', '2023-08-26 09:14:02.744634'),
+(160, 'core', '0115_gallaryimages_aboutus_alter_businesslogs_date_and_more', '2023-08-26 09:51:49.930474'),
+(161, 'core', '0116_rename_aboutus_gallaryimages_title_and_more', '2023-08-26 09:55:51.687212'),
+(162, 'core', '0117_youtubevideo_type_alter_businesslogs_date_and_more', '2023-08-29 06:33:19.100725'),
+(163, 'core', '0118_youtubevideo_sequence_alter_businesslogs_date_and_more', '2023-08-29 09:44:35.419875'),
+(164, 'core', '0119_usermembership_next_date_userstaking_expire_date_and_more', '2023-08-31 05:59:33.611778'),
+(165, 'core', '0120_user_farming_roi_user_level_income_user_staking_roi_and_more', '2023-08-31 09:49:12.103820'),
+(166, 'core', '0121_rename_farming_roi_user_farming_roi_status_and_more', '2023-08-31 10:02:40.850412'),
+(167, 'core', '0122_manageroi_alter_businesslogs_date_and_more', '2023-08-31 10:04:56.097531'),
+(168, 'core', '0123_userreferral_date_alter_businesslogs_date_and_more', '2023-08-31 11:45:41.655659'),
+(169, 'core', '0124_userreferral_status_alter_businesslogs_date_and_more', '2023-08-31 11:49:14.500023');
 
 -- --------------------------------------------------------
 
@@ -363,8 +955,56 @@ CREATE TABLE `django_session` (
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
-('le86bs9uj50uep2puqff8d1ysy2rtuhp', 'eyJlbWFpbCI6InNodWJoYW1ib3hmeUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4ifQ:1qJ9t9:gdhuVAp7Oai-3CmzvoK-FIZ-kNKy9qdc2QN-sIIL2EY', '2023-07-25 09:42:31.478076'),
-('lkix1n35ks3qhjbtocq36tlecog504fy', 'eyJlbWFpbCI6InNodWJoYW1ib3hmeUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4ifQ:1qJmbf:t8WGEBHcn5aRQup0KHptX8XbIgVI6DAC9QpwkNDqm5M', '2023-07-27 03:03:03.690809');
+('0tspg1r34oqjvpy6jh5vgxw720g5acf4', 'eyJlbWFpbCI6Inh5ekBnbWFpbC5jb20iLCJyb2xlIjoidXNlciJ9:1qZo9J:BN9nRN02shDPEc10razh7SvdiCDasxYWb9nCzYkbgyo', '2023-09-09 07:56:01.067517'),
+('b4e1yzxmdcrlflxke9v2c3e3ocx753kb', 'eyJlbWFpbCI6Inh5ekBnbWFpbC5jb20iLCJyb2xlIjoidXNlciJ9:1qZrYQ:sYtrBK3F5YtObJxNFqO-jgVQ5FfQOuB0cFHGNDr-EBU', '2023-09-09 11:34:10.312498'),
+('cngr36xz9x7moohcra88wfvdcd9mwltv', 'eyJnb29nbGUtb2F1dGgyX3N0YXRlIjoiRDhzd09YS0lYQllRTHFucWFtMkxjczFFVkQ5ZzFFTU8ifQ:1qQLeR:TI6RI3784pN1sjA-JEcuprhmjaf0W658OhejDAKL81s', '2023-08-14 05:41:03.548750'),
+('g2hm2q0lnf5pz8kagcc008tuvvbi0ga5', '.eJxVkEFPwzAMhf9LzlAlbbOsnMaFTYhRqnHgFrmJ00bNFtS00gbiv5OMHejJ1rM_vyd_k877zuG9h3nqcxkmmJA8kNeP8ILvc9MM9ZPYXdbPh2b_eaiRDb3F_duZ3BGZCDkHHKXVEWE5X6otqAFPaRS8suCk8iNmNzVkf8bZ9lrqx2S_5HsIfYSx0LpkuDLIuS4NM63SyhQgKk1pUXFYV2gMFaJkPI9LuuKUawqiXTFmRBuP3vyvpx2ESTrf2dO_gIsnRACPYF3Uz5evTZf6TPlj1Efv0ndSPPLzC68_ap4:1qbfXZ:8-m42ols_2wa6pMsxQGTomyU-f405b4ZecDrWXYp5vc', '2023-09-14 11:08:45.387068'),
+('hap09kaelkrx9e82phi5kjrs49drxc8y', 'eyJlbWFpbCI6Inh5ekBnbWFpbC5jb20iLCJyb2xlIjoidXNlciJ9:1qXz9d:zkyRcnfh6lDmsmLzlgOgIfNgotBpTnNlxYt_363W8bA', '2023-09-04 07:16:49.954014'),
+('hi1wz84e679wfej8zejtjhm5x0fizw77', 'eyJlbWFpbCI6InNodWJoYW1ib3hmeUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4ifQ:1qXNXn:CxAHzTVGFjHERvN5X85OpWcfFrzdOfOwUjeu6HwGEx4', '2023-09-02 15:07:15.340175'),
+('hwfba1wcdhswflkyaebtgbnb7u1vyh74', 'eyJnb29nbGUtb2F1dGgyX3N0YXRlIjoiUWJzR3VzdEk0ZnU4ek1WMGxzSXFsbUo2c0VCSGF3ZU8ifQ:1qPgYQ:2q6kJEpUsauF07RyzZ3w4EgRZGe8XmOUqabqUsisA3g', '2023-08-12 09:48:06.239172'),
+('jcb80jcobajwoy76oszrh79e9zwkavwf', 'eyJlbWFpbCI6Inh5ekBnbWFpbC5jb20iLCJyb2xlIjoidXNlciJ9:1qbbx2:6eL757F-SdFZf8_gCRtd3lXrzT9vy7IxpILmmnDnatQ', '2023-09-14 07:18:48.881040'),
+('kbssk4dfpm2uijibg6cpmxmbxyyw6gxe', 'e30:1qNsmM:A_OhqFFSGsWQtlshPkfubOHR9KAPAx4QHvrC5bOTfEo', '2023-08-07 10:27:02.095952'),
+('le86bs9uj50uep2puqff8d1ysy2rtuhp', 'eyJlbWFpbCI6InNhY2hpbmJveGZ5QGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIn0:1qMpaP:KLW4yo13IT8KTBlVdFV-qX06AaNkCTOZaWP5Cc9tFG4', '2023-08-04 12:50:21.881240'),
+('m8pqyztf92uu04732qxn06gwqek1f69a', '.eJxVjsEKwjAQRP8lZy1Jumlab-JBKRZFEb2FJE3aam3QRBDEf7dqD3padnZn5j2QkLdQi5s3V9GUaIIIBTT6VZXUJ9O9T97pRrZCu6uJBtVHlXNVa6L5Z6ymvY3--2vp696MIbPAE44tozZlmYQMbEwNIalW2gKxvExSDIqyOCM0AawUJxYwZTxmRPWhQ_8nupU-iNZVTfcD-GUZOzlQ_O3CBxlM_7U9H-K7DQVJl5fDfG1m-6TLF9Vxs8uh8AuGni9Wd1t4:1qPhVh:AvK3u5aXmgs-odl0YoRWTXx3hv-OWG6ttDJMqFDSTiE', '2023-08-12 10:49:21.969154'),
+('mmm3sk6yb7gdcbex6cyajr4iyv3689rn', 'eyJlbWFpbCI6Inh5ekBnbWFpbC5jb20iLCJyb2xlIjoidXNlciJ9:1qZA9I:PjX8x2qnHP9JFDcHfaw0Wh2SJ3qBr8v0O8eyQXFzFk0', '2023-09-07 13:13:20.626249'),
+('pqs2vw1mops7sjj765s8rrp70qcqtvcj', 'eyJyZXNldCI6IlRydWUiLCJlbWFpbCI6ImFtYXJqb3RzaW5naEBnbWFpbC5jb20ifQ:1qZskN:rhk3J_59wZgWlADwEbCL97MzTnyw5tlvE1bLP_s4uIo', '2023-09-09 12:50:35.033324'),
+('szmqxk6aqe4sgo7au3z9qcb71hv97a64', 'eyJlbWFpbCI6ImFuaXJ1ZGhib3hmeUBnbWFpbC5jb20iLCJyb2xlIjoidXNlciJ9:1qaZ29:1I3BFQmyKMKNjqSqtHpTfu__gg7PQZGrB1KmGYvByIY', '2023-09-11 09:59:45.596710'),
+('ufnq4d46s6ufq9i3veoyfm4vym85rj7t', 'eyJlbWFpbCI6Inh5ekBnbWFpbC5jb20iLCJyb2xlIjoidXNlciJ9:1qZrEH:zGhk3tdsqRxbRmXmpuEr-mm2_GZA_2bANEp4jm2VKJ8', '2023-09-09 11:13:21.787768'),
+('vjpf7gbj61olkm0bjctfylj2hz2um125', 'eyJlbWFpbCI6Inh5ekBnbWFpbC5jb20iLCJyb2xlIjoidXNlciJ9:1qOH9J:s3rgBZLDQBtLcKTY3HX-PWq4e46DVMM4MpOq9Uq_y-c', '2023-08-08 12:28:21.496346'),
+('w18mcml6udvai3m01stpf8ahe0rugcbt', 'eyJlbWFpbCI6Inh5ekBnbWFpbC5jb20iLCJyb2xlIjoidXNlciJ9:1qZoHq:Yzpc-VhxE1-7nFQgdbyupEPLZMfDbSZ-9BFIzsAXJ7I', '2023-09-09 08:04:50.991745'),
+('zsvix2b2zrt7wykeabeidzlazlal9vcd', 'eyJnb29nbGUtb2F1dGgyX3N0YXRlIjoiQUk4UjNJZmtkSmhnTHhpWVdKbjZLTkg4a09CWFdybHciLCJlbWFpbCI6ImthcmFucmFuYUBnbWFpbC5jb20iLCJyb2xlIjoidXNlciJ9:1qRsIR:LZFIBwfBoxNvt1N2yGiyv5_1bZJFaY0aNP42bczbapI', '2023-08-18 10:44:39.442752');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `farmingroilogs`
+--
+
+CREATE TABLE `farmingroilogs` (
+  `id` bigint(20) NOT NULL,
+  `date` varchar(200) NOT NULL,
+  `status` varchar(100) NOT NULL,
+  `plan_id` bigint(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `roi` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fastrackmodel`
+--
+
+CREATE TABLE `fastrackmodel` (
+  `id` bigint(20) NOT NULL,
+  `income` varchar(100) NOT NULL,
+  `status` varchar(100) NOT NULL,
+  `left_child_id` bigint(20) DEFAULT NULL,
+  `level_id` bigint(20) NOT NULL,
+  `parent_id_id` bigint(20) NOT NULL,
+  `right_child_id` bigint(20) DEFAULT NULL,
+  `plan_id` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -382,46 +1022,74 @@ CREATE TABLE `levels` (
 --
 
 INSERT INTO `levels` (`id`, `points`) VALUES
-(1, '5'),
+(1, '20'),
 (2, '10'),
-(3, '15'),
-(4, '20'),
-(5, '25'),
-(6, '30'),
-(7, '35'),
-(8, '40'),
-(9, '45'),
-(10, '50'),
-(11, '55'),
-(12, '60'),
-(13, '65'),
-(14, '70'),
-(15, '75'),
-(16, '80'),
-(17, '85'),
-(18, '90'),
-(19, '95'),
-(20, '100'),
-(21, '105'),
-(22, '110'),
-(23, '115'),
-(24, '120'),
-(25, '125'),
-(26, '130'),
-(27, '135'),
-(28, '140'),
-(29, '145'),
-(30, '150'),
-(31, '155'),
-(32, '160'),
-(33, '165'),
-(34, '170'),
-(35, '175'),
-(36, '180'),
-(37, '185'),
-(38, '190'),
-(39, '195'),
-(40, '200');
+(3, '5'),
+(4, '5'),
+(5, '5'),
+(6, '5'),
+(7, '5'),
+(8, '5'),
+(9, '5'),
+(10, '5'),
+(11, '1'),
+(12, '1'),
+(13, '1'),
+(14, '1'),
+(15, '1'),
+(16, '1'),
+(17, '1'),
+(18, '1'),
+(19, '1'),
+(20, '1'),
+(21, '0.5'),
+(22, '0.5'),
+(23, '0.5'),
+(24, '0.5'),
+(25, '0.5'),
+(26, '0.5'),
+(27, '0.5'),
+(28, '0.5'),
+(29, '0.5'),
+(30, '0.5');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `manageroi`
+--
+
+CREATE TABLE `manageroi` (
+  `id` bigint(20) NOT NULL,
+  `farming_roi` varchar(100) NOT NULL,
+  `staking_roi` varchar(100) NOT NULL,
+  `level_income` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `manageroi`
+--
+
+INSERT INTO `manageroi` (`id`, `farming_roi`, `staking_roi`, `level_income`) VALUES
+(1, '1', '1', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ptransfer`
+--
+
+CREATE TABLE `ptransfer` (
+  `id` bigint(20) NOT NULL,
+  `status` varchar(200) NOT NULL,
+  `type` varchar(200) NOT NULL,
+  `date` varchar(200) NOT NULL,
+  `amount` varchar(200) NOT NULL,
+  `child_id_id` bigint(20) NOT NULL,
+  `user_id_id` bigint(20) NOT NULL,
+  `wallet_id` bigint(20) NOT NULL,
+  `currency` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -433,20 +1101,162 @@ CREATE TABLE `rank` (
   `id` bigint(20) NOT NULL,
   `rank` varchar(200) NOT NULL,
   `royality_income` varchar(200) NOT NULL,
-  `points` varchar(200) NOT NULL
+  `business_required` varchar(200) NOT NULL,
+  `image` varchar(200) NOT NULL,
+  `reward` varchar(200) NOT NULL,
+  `status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `rank`
 --
 
-INSERT INTO `rank` (`id`, `rank`, `royality_income`, `points`) VALUES
-(1, 'silver', '5 direct', '20'),
-(2, 'Gold', '5 silver', '20'),
-(3, 'Perl', '4 gold', '20'),
-(4, 'Saffire', '3 pearl', '20'),
-(5, 'Platinum', '2 saffire', '20'),
-(6, 'Diamond', '1 platinum', '20');
+INSERT INTO `rank` (`id`, `rank`, `royality_income`, `business_required`, `image`, `reward`, `status`) VALUES
+(7, 'Star', '500', '7500', 'android.jpg', 'Android Phone', '1'),
+(8, 'Silver', '1000', '15000', 'android.jpg', 'iPhone', '1'),
+(9, 'Gold', '2000', '30000', 'android.jpg', 'Mac Book', '1'),
+(10, 'Perl', '5000', '75000', 'android.jpg', 'Royal Enfield', '1'),
+(11, 'Platinum', '10000', '150000', 'android.jpg', 'Beleno', '1'),
+(12, 'Ruby', '20000', '600000', 'android.jpg', 'MG Hector', '1'),
+(13, 'Emerald', '40000', '1500000', 'android.jpg', 'Fortuner', '1'),
+(14, 'Diamond', '70000', '3000000', 'android.jpg', 'BMW', '1'),
+(15, 'Black Diamond', '150000', '6000000', 'android.jpg', 'Range Rover', '1'),
+(16, 'Kohinoor', '500000', '15000000', 'android.jpg', 'Banglow', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `socialaccount_socialaccount`
+--
+
+CREATE TABLE `socialaccount_socialaccount` (
+  `id` int(11) NOT NULL,
+  `provider` varchar(30) NOT NULL,
+  `uid` varchar(191) NOT NULL,
+  `last_login` datetime(6) NOT NULL,
+  `date_joined` datetime(6) NOT NULL,
+  `extra_data` longtext NOT NULL,
+  `user_id` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `socialaccount_socialapp`
+--
+
+CREATE TABLE `socialaccount_socialapp` (
+  `id` int(11) NOT NULL,
+  `provider` varchar(30) NOT NULL,
+  `name` varchar(40) NOT NULL,
+  `client_id` varchar(191) NOT NULL,
+  `secret` varchar(191) NOT NULL,
+  `key` varchar(191) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `socialaccount_socialtoken`
+--
+
+CREATE TABLE `socialaccount_socialtoken` (
+  `id` int(11) NOT NULL,
+  `token` longtext NOT NULL,
+  `token_secret` longtext NOT NULL,
+  `expires_at` datetime(6) DEFAULT NULL,
+  `account_id` int(11) NOT NULL,
+  `app_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `social_auth_association`
+--
+
+CREATE TABLE `social_auth_association` (
+  `id` bigint(20) NOT NULL,
+  `server_url` varchar(255) NOT NULL,
+  `handle` varchar(255) NOT NULL,
+  `secret` varchar(255) NOT NULL,
+  `issued` int(11) NOT NULL,
+  `lifetime` int(11) NOT NULL,
+  `assoc_type` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `social_auth_code`
+--
+
+CREATE TABLE `social_auth_code` (
+  `id` bigint(20) NOT NULL,
+  `email` varchar(254) NOT NULL,
+  `code` varchar(32) NOT NULL,
+  `verified` tinyint(1) NOT NULL,
+  `timestamp` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `social_auth_nonce`
+--
+
+CREATE TABLE `social_auth_nonce` (
+  `id` bigint(20) NOT NULL,
+  `server_url` varchar(255) NOT NULL,
+  `timestamp` int(11) NOT NULL,
+  `salt` varchar(65) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `social_auth_partial`
+--
+
+CREATE TABLE `social_auth_partial` (
+  `id` bigint(20) NOT NULL,
+  `token` varchar(32) NOT NULL,
+  `next_step` smallint(5) UNSIGNED NOT NULL CHECK (`next_step` >= 0),
+  `backend` varchar(32) NOT NULL,
+  `data` longtext NOT NULL,
+  `timestamp` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `social_auth_usersocialauth`
+--
+
+CREATE TABLE `social_auth_usersocialauth` (
+  `id` bigint(20) NOT NULL,
+  `provider` varchar(32) NOT NULL,
+  `uid` varchar(255) NOT NULL,
+  `extra_data` longtext NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `created` datetime(6) NOT NULL,
+  `modified` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `stakingroilogs`
+--
+
+CREATE TABLE `stakingroilogs` (
+  `id` bigint(20) NOT NULL,
+  `roi` varchar(200) NOT NULL,
+  `date` varchar(200) NOT NULL,
+  `status` varchar(100) NOT NULL,
+  `plan_id` bigint(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -456,8 +1266,34 @@ INSERT INTO `rank` (`id`, `rank`, `royality_income`, `points`) VALUES
 
 CREATE TABLE `transactions` (
   `id` bigint(20) NOT NULL,
-  `transactions` longtext NOT NULL,
-  `wallet_id` bigint(20) NOT NULL
+  `wallet_id` bigint(20) NOT NULL,
+  `amount` varchar(200) NOT NULL,
+  `coin` varchar(200) NOT NULL,
+  `created_at` varchar(200) NOT NULL,
+  `network` varchar(200) NOT NULL,
+  `status` varchar(200) NOT NULL,
+  `address` varchar(200) NOT NULL,
+  `type` varchar(200) NOT NULL,
+  `user_id` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usermembership`
+--
+
+CREATE TABLE `usermembership` (
+  `id` bigint(20) NOT NULL,
+  `amount` varchar(200) NOT NULL,
+  `plan_id` bigint(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `date` varchar(200) NOT NULL,
+  `status` varchar(200) NOT NULL,
+  `booster_plan` varchar(200) NOT NULL,
+  `max_roi` varchar(200) NOT NULL,
+  `roi_recieved` varchar(200) NOT NULL,
+  `next_date` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -485,89 +1321,41 @@ CREATE TABLE `users` (
   `created_at` varchar(200) NOT NULL,
   `remember_token` varchar(200) NOT NULL,
   `referal_by` varchar(200) DEFAULT NULL,
-  `referal_code` varchar(200) NOT NULL
+  `referal_code` varchar(200) NOT NULL,
+  `activation_date` varchar(200) NOT NULL,
+  `paid_members` varchar(200) NOT NULL,
+  `phone_no` varchar(200) DEFAULT NULL,
+  `business` varchar(200) NOT NULL,
+  `farming_roi_status` varchar(200) NOT NULL,
+  `level_income_status` varchar(100) NOT NULL,
+  `staking_roi_status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `is_staff`, `is_active`, `date_joined`, `email`, `verified_at`, `role`, `status`, `updated_at`, `created_at`, `remember_token`, `referal_by`, `referal_code`) VALUES
-(1, 'pbkdf2_sha256$390000$T74S78E0fzz97fNzYHfuU3$FGR5RQ5pQjgyaAR+qv2cADWUWXec/zpBAU8Il/oukJ8=', NULL, 1, 'shubham', 'Shubham', 'Sharma', 1, 1, '2023-07-09 11:28:45.501935', 'shubhamboxfy@gmail.com', 'True', 'admin', '1', '2023-07-09 11:28:26.336200', '2023-07-09 11:28:26.336200', 'False', NULL, 'b89735d6'),
-(29, '123', NULL, 0, 'shubhamsharma', 'shubham', 'sharma', 0, 0, '2023-07-09 14:07:13.391810', 'shubham@gmail.com', 'True', 'user', '1', '2023-07-09 14:07:08.924798', '2023-07-09 14:07:08.924798', 'False', '20e1960e', 'e47eeaf2'),
-(31, '123', NULL, 0, 'abc', 'shubham', 'sharma', 0, 0, '2023-07-09 14:08:12.905568', 'abc@gmail.com', 'True', 'user', '1', '2023-07-09 14:08:05.734143', '2023-07-09 14:08:05.734143', 'False', NULL, '065b55ff'),
-(32, '123', NULL, 0, 'abc1', 'shubham', 'sharma', 0, 0, '2023-07-09 14:09:20.081692', 'abc1@gmail.com', 'True', 'user', '1', '2023-07-09 14:08:46.157874', '2023-07-09 14:08:46.157874', 'False', '065b55ff', '1e7381fb'),
-(33, '123', NULL, 0, 'abc2', 'shubham', 'sharma', 0, 0, '2023-07-09 14:10:20.342430', 'abc2@gmail.com', 'True', 'user', '1', '2023-07-09 14:10:08.539224', '2023-07-09 14:10:08.539224', 'False', '065b55ff', '4f8e0f33'),
-(34, '123', NULL, 0, 'abc3', 'shubham', 'sharma', 0, 0, '2023-07-09 14:11:08.023880', 'abc3@gmail.com', 'True', 'user', '1', '2023-07-09 14:11:04.023583', '2023-07-09 14:11:04.023583', 'False', '065b55ff', '70a0253f'),
-(35, '123', NULL, 0, 'abc4', 'shubham', 'sharma', 0, 0, '2023-07-09 14:11:24.451486', 'abc4@gmail.com', 'True', 'user', '1', '2023-07-09 14:11:16.433092', '2023-07-09 14:11:16.433092', 'False', '065b55ff', '7805afb1'),
-(36, '123', NULL, 0, 'abc5', 'shubham', 'sharma', 0, 0, '2023-07-09 14:13:26.987962', 'abc5@gmail.com', 'True', 'user', '1', '2023-07-09 14:12:01.640297', '2023-07-09 14:12:01.640297', 'False', '065b55ff', '92f7c221'),
-(37, '123', NULL, 0, 'abc6', 'shubham', 'sharma', 0, 0, '2023-07-09 14:14:14.750779', 'abc6@gmail.com', 'True', 'user', '1', '2023-07-09 14:13:57.926346', '2023-07-09 14:13:57.926346', 'False', '065b55ff', 'd84799e6'),
-(39, '123', NULL, 0, 'abc7', 'shubham', 'sharma', 0, 0, '2023-07-09 14:15:29.813509', 'abc7@gmail.com', 'True', 'user', '1', '2023-07-09 14:15:26.299397', '2023-07-09 14:15:26.299397', 'False', '1e7381fb', '0cf44234'),
-(40, '123', NULL, 0, 'abc8', 'shubham', 'sharma', 0, 0, '2023-07-09 14:15:48.980036', 'abc8@gmail.com', 'True', 'user', '1', '2023-07-09 14:15:46.170955', '2023-07-09 14:15:46.171965', 'False', '1e7381fb', '18cc926a'),
-(41, '123', NULL, 0, 'abc9', 'shubham', 'sharma', 0, 0, '2023-07-09 14:17:50.357711', 'abc9@gmail.com', 'True', 'user', '1', '2023-07-09 14:16:56.322408', '2023-07-09 14:16:56.322408', 'False', '7805afb1', '429cae10'),
-(43, '123', NULL, 0, 'abc10', 'shubham', 'sharma', 0, 0, '2023-07-09 14:18:13.539658', 'abc10@gmail.com', 'True', 'user', '1', '2023-07-09 14:18:09.431368', '2023-07-09 14:18:09.431368', 'False', '7805afb1', '6e3038d7'),
-(47, '123', NULL, 0, 'abc13', 'shubham', 'sharma', 0, 0, '2023-07-10 08:06:03.630495', 'abc13@gmail.com', 'True', 'user', '1', '2023-07-10 08:05:57.043815', '2023-07-10 08:05:57.043815', 'False', '7805afb1', '4933d1aa'),
-(48, '123', NULL, 0, 'abc14', 'shubham', 'sharma', 0, 0, '2023-07-10 08:06:17.965007', 'abc14@gmail.com', 'True', 'user', '1', '2023-07-10 08:05:57.043815', '2023-07-10 08:05:57.043815', 'False', '7805afb1', 'a6046e94'),
-(49, 'pbkdf2_sha256$390000$32lAvBpgJeyGUNdehBgEQT$vycRF77XjNKsz5AU0X4XeKYQMyrAVsdmlhak8oitdzE=', NULL, 1, 'shubhamsharma001', '', '', 1, 1, '2023-07-10 11:01:12.399262', 'shubhamsharma@gmail.com', 'True', 'user', '1', '2023-07-10 11:00:34.629803', '2023-07-10 11:00:34.630803', 'False', NULL, '3adb015a'),
-(50, '123', NULL, 0, 'jkl1', 'shubham', 'sharma', 0, 0, '2023-07-11 10:03:44.926882', 'jkl1@gmail.com', 'True', 'user', '1', '2023-07-11 09:59:35.892555', '2023-07-11 09:59:35.892555', 'False', '1e7381fb', '72fbe790'),
-(51, '123', NULL, 0, 'jkl2', 'shubham', 'sharma', 0, 0, '2023-07-11 10:03:57.568652', 'jkl2@gmail.com', 'True', 'user', '1', '2023-07-11 09:59:35.892555', '2023-07-11 09:59:35.892555', 'False', '1e7381fb', 'ce84590b'),
-(52, '123', NULL, 0, 'jkl3', 'shubham', 'sharma', 0, 0, '2023-07-11 10:04:10.218690', 'jkl3@gmail.com', 'True', 'user', '1', '2023-07-11 09:59:35.892555', '2023-07-11 09:59:35.892555', 'False', '1e7381fb', 'f6feb66f'),
-(53, '123', NULL, 0, 'jkl4', 'shubham', 'sharma', 0, 0, '2023-07-11 10:05:18.018038', 'jkl4@gmail.com', 'True', 'user', '1', '2023-07-11 09:59:35.892555', '2023-07-11 09:59:35.892555', 'False', '7805afb1', '14a963fe'),
-(54, '123', NULL, 0, 'jkl5', 'shubham', 'sharma', 0, 0, '2023-07-11 10:28:44.436391', 'jkl5@gmail.com', 'False', 'user', '1', '2023-07-11 10:09:04.278470', '2023-07-11 10:09:04.278470', 'False', '4f8e0f33', '99fd7fd4'),
-(55, '123', NULL, 0, 'jkl6', 'shubham', 'sharma', 0, 0, '2023-07-11 10:28:54.340864', 'jkl6@gmail.com', 'False', 'user', '1', '2023-07-11 10:09:04.278470', '2023-07-11 10:09:04.278470', 'False', '4f8e0f33', '149fed70'),
-(56, '123', NULL, 0, 'jkl7', 'shubham', 'sharma', 0, 0, '2023-07-11 10:29:03.013546', 'jkl7@gmail.com', 'False', 'user', '1', '2023-07-11 10:09:04.278470', '2023-07-11 10:09:04.278470', 'False', '4f8e0f33', 'bf8c08fe'),
-(57, '123', NULL, 0, 'jkl8', 'shubham', 'sharma', 0, 0, '2023-07-11 10:29:12.201106', 'jkl8@gmail.com', 'False', 'user', '1', '2023-07-11 10:09:04.278470', '2023-07-11 10:09:04.278470', 'False', '4f8e0f33', 'edf94434'),
-(58, '123', NULL, 0, 'jkl9', 'shubham', 'sharma', 0, 0, '2023-07-11 10:29:20.421342', 'jkl9@gmail.com', 'False', 'user', '1', '2023-07-11 10:09:04.278470', '2023-07-11 10:09:04.278470', 'False', '4f8e0f33', 'ba9a9b98'),
-(59, '123', NULL, 0, 'jkl10', 'shubham', 'sharma', 0, 0, '2023-07-11 10:30:15.754036', 'jkl10@gmail.com', 'False', 'user', '1', '2023-07-11 10:09:04.278470', '2023-07-11 10:09:04.278470', 'False', '70a0253f', '1d25142c'),
-(60, '123', NULL, 0, 'jkl11', 'shubham', 'sharma', 0, 0, '2023-07-11 10:30:26.881346', 'jkl11@gmail.com', 'False', 'user', '1', '2023-07-11 10:09:04.278470', '2023-07-11 10:09:04.278470', 'False', '70a0253f', '3292c1fd'),
-(61, '123', NULL, 0, 'jkl12', 'shubham', 'sharma', 0, 0, '2023-07-11 10:30:37.242290', 'jkl12@gmail.com', 'False', 'user', '1', '2023-07-11 10:09:04.278470', '2023-07-11 10:09:04.278470', 'False', '70a0253f', '07ee96ff'),
-(62, '123', NULL, 0, 'jkl13', 'shubham', 'sharma', 0, 0, '2023-07-11 10:30:46.516254', 'jkl13@gmail.com', 'False', 'user', '1', '2023-07-11 10:09:04.278470', '2023-07-11 10:09:04.278470', 'False', '70a0253f', '9f3bc078'),
-(63, '123', NULL, 0, 'jkl14', 'shubham', 'sharma', 0, 0, '2023-07-11 10:30:56.596414', 'jkl14@gmail.com', 'False', 'user', '1', '2023-07-11 10:09:04.278470', '2023-07-11 10:09:04.278470', 'False', '70a0253f', '55552012'),
-(64, '123', NULL, 0, 'jkl15', 'shubham', 'sharma', 0, 0, '2023-07-11 10:37:35.352748', 'jkl15@gmail.com', 'False', 'user', '1', '2023-07-11 10:37:02.275083', '2023-07-11 10:37:02.275083', 'False', '92f7c221', '2d934495'),
-(65, '123', NULL, 0, 'jkl16', 'shubham', 'sharma', 0, 0, '2023-07-11 10:37:48.743403', 'jkl16@gmail.com', 'False', 'user', '1', '2023-07-11 10:37:02.275083', '2023-07-11 10:37:02.275083', 'False', '92f7c221', 'b0b24940'),
-(66, '123', NULL, 0, 'jkl17', 'shubham', 'sharma', 0, 0, '2023-07-11 10:38:00.260228', 'jkl17@gmail.com', 'False', 'user', '1', '2023-07-11 10:37:02.275083', '2023-07-11 10:37:02.275083', 'False', '92f7c221', 'c1d85129'),
-(67, '123', NULL, 0, 'jkl18', 'shubham', 'sharma', 0, 0, '2023-07-11 10:38:13.081054', 'jkl18@gmail.com', 'False', 'user', '1', '2023-07-11 10:37:02.275083', '2023-07-11 10:37:02.275083', 'False', '92f7c221', 'cc9ee2da'),
-(68, '123', NULL, 0, 'jkl19', 'shubham', 'sharma', 0, 0, '2023-07-11 10:38:25.286873', 'jkl19@gmail.com', 'False', 'user', '1', '2023-07-11 10:37:02.275083', '2023-07-11 10:37:02.275083', 'False', '92f7c221', 'f97b804f'),
-(69, '123', NULL, 0, 'jkl20', 'shubham', 'sharma', 0, 0, '2023-07-11 10:39:53.839668', 'jkl20@gmail.com', 'False', 'user', '1', '2023-07-11 10:39:30.203942', '2023-07-11 10:39:30.203942', 'False', '92f7c221', 'f84d54ad'),
-(70, '123', NULL, 0, 'jkl21', 'shubham', 'sharma', 0, 0, '2023-07-11 10:41:45.338743', 'jkl21@gmail.com', 'False', 'user', '1', '2023-07-11 10:41:34.617669', '2023-07-11 10:41:34.617669', 'False', '92f7c221', '9ef9ad3f'),
-(71, '123', NULL, 0, 'jkl22', 'shubham', 'sharma', 0, 0, '2023-07-11 10:44:58.825144', 'jkl22@gmail.com', 'False', 'user', '1', '2023-07-11 10:42:35.732403', '2023-07-11 10:42:35.732403', 'False', '92f7c221', '199d225c'),
-(72, '123', NULL, 0, 'jkl23', 'shubham', 'sharma', 0, 0, '2023-07-11 10:45:52.878713', 'jkl23@gmail.com', 'False', 'user', '1', '2023-07-11 10:45:34.673770', '2023-07-11 10:45:34.673770', 'False', '92f7c221', 'be39e90b'),
-(73, '123', NULL, 0, 'jkl24', 'shubham', 'sharma', 0, 0, '2023-07-11 10:46:30.063279', 'jkl24@gmail.com', 'False', 'user', '1', '2023-07-11 10:46:16.585840', '2023-07-11 10:46:16.585840', 'False', '92f7c221', '003405cf'),
-(74, '123', NULL, 0, 'jkl25', 'shubham', 'sharma', 0, 0, '2023-07-11 10:47:25.430814', 'jkl25@gmail.com', 'False', 'user', '1', '2023-07-11 10:47:15.615444', '2023-07-11 10:47:15.615444', 'False', '92f7c221', 'a916a109'),
-(75, '123', NULL, 0, 'jkl26', 'shubham', 'sharma', 0, 0, '2023-07-11 10:51:06.785006', 'jkl26@gmail.com', 'False', 'user', '1', '2023-07-11 10:48:43.005536', '2023-07-11 10:48:43.005536', 'False', '92f7c221', '4f0b34ac'),
-(76, '123', NULL, 0, 'jkl27', 'shubham', 'sharma', 0, 0, '2023-07-11 10:51:33.654383', 'jkl27@gmail.com', 'False', 'user', '1', '2023-07-11 10:51:19.354848', '2023-07-11 10:51:19.354848', 'False', '92f7c221', 'e4ae29d6'),
-(77, '123', NULL, 0, 'jkl28', 'shubham', 'sharma', 0, 0, '2023-07-11 10:52:07.353351', 'jkl28@gmail.com', 'False', 'user', '1', '2023-07-11 10:51:54.625897', '2023-07-11 10:51:54.625897', 'False', '92f7c221', '3c08dcbf'),
-(78, '123', NULL, 0, 'jkl29', 'shubham', 'sharma', 0, 0, '2023-07-11 10:53:24.737963', 'jkl29@gmail.com', 'False', 'user', '1', '2023-07-11 10:53:12.939099', '2023-07-11 10:53:12.939099', 'False', '92f7c221', 'cceeb7c1'),
-(79, '123', NULL, 0, 'jkl30', 'shubham', 'sharma', 0, 0, '2023-07-11 10:54:04.426258', 'jkl30@gmail.com', 'False', 'user', '1', '2023-07-11 10:53:44.855175', '2023-07-11 10:53:44.855175', 'False', '92f7c221', '09b14f22'),
-(80, '123', NULL, 0, 'jkl31', 'shubham', 'sharma', 0, 0, '2023-07-11 10:54:49.977566', 'jkl31@gmail.com', 'False', 'user', '1', '2023-07-11 10:54:33.956641', '2023-07-11 10:54:33.956641', 'False', '92f7c221', '4f54f8db'),
-(81, '123', NULL, 0, 'jkl32', 'shubham', 'sharma', 0, 0, '2023-07-11 10:56:38.082456', 'jkl32@gmail.com', 'False', 'user', '1', '2023-07-11 10:56:26.845451', '2023-07-11 10:56:26.845451', 'False', '92f7c221', 'dbee07d2'),
-(82, '123', NULL, 0, 'jkl33', 'shubham', 'sharma', 0, 0, '2023-07-11 10:57:29.595737', 'jkl33@gmail.com', 'False', 'user', '1', '2023-07-11 10:57:15.388856', '2023-07-11 10:57:15.388856', 'False', '92f7c221', '4d2f7823'),
-(83, '123', NULL, 0, 'jkl34', 'shubham', 'sharma', 0, 0, '2023-07-11 11:01:36.929397', 'jkl34@gmail.com', 'False', 'user', '1', '2023-07-11 11:01:32.170724', '2023-07-11 11:01:32.170724', 'False', '92f7c221', '31783580'),
-(84, '123', NULL, 0, 'jkl35', 'shubham', 'sharma', 0, 0, '2023-07-11 11:03:08.111327', 'jkl35@gmail.com', 'False', 'user', '1', '2023-07-11 11:02:50.266672', '2023-07-11 11:02:50.266672', 'False', '92f7c221', '2efd173b'),
-(85, '123', NULL, 0, 'jkl36', 'shubham', 'sharma', 0, 0, '2023-07-11 11:06:41.423276', 'jkl36@gmail.com', 'False', 'user', '1', '2023-07-11 11:06:20.082467', '2023-07-11 11:06:20.082467', 'False', '92f7c221', '53dcc3d0'),
-(86, '123', NULL, 0, 'jkl37', 'shubham', 'sharma', 0, 0, '2023-07-11 11:08:43.315326', 'jkl37@gmail.com', 'False', 'user', '1', '2023-07-11 11:08:27.780972', '2023-07-11 11:08:27.780972', 'False', '92f7c221', '39143cb2'),
-(87, '123', NULL, 0, 'jkl38', 'shubham', 'sharma', 0, 0, '2023-07-11 11:10:24.626114', 'jkl38@gmail.com', 'False', 'user', '1', '2023-07-11 11:10:12.941349', '2023-07-11 11:10:12.941349', 'False', '92f7c221', '17269e0a'),
-(88, '123', NULL, 0, 'jkl39', 'shubham', 'sharma', 0, 0, '2023-07-11 11:11:35.061394', 'jkl39@gmail.com', 'False', 'user', '1', '2023-07-11 11:11:24.000913', '2023-07-11 11:11:24.000913', 'False', '92f7c221', '3d54a3b5'),
-(89, '123', NULL, 0, 'jkl40', 'shubham', 'sharma', 0, 0, '2023-07-11 11:13:43.305888', 'jkl40@gmail.com', 'False', 'user', '1', '2023-07-11 11:13:30.971075', '2023-07-11 11:13:30.971075', 'False', '92f7c221', 'd3082161'),
-(90, '123', NULL, 0, 'jkl41', 'shubham', 'sharma', 0, 0, '2023-07-11 11:15:47.308928', 'jkl41@gmail.com', 'False', 'user', '1', '2023-07-11 11:15:39.238856', '2023-07-11 11:15:39.238856', 'False', '92f7c221', '7ec74b1b'),
-(91, '123', NULL, 0, 'jkl42', 'shubham', 'sharma', 0, 0, '2023-07-11 11:19:14.263884', 'jkl42@gmail.com', 'False', 'user', '1', '2023-07-11 11:19:00.868889', '2023-07-11 11:19:00.868889', 'False', '92f7c221', '3c2e7f82'),
-(92, '123', NULL, 0, 'jkl43', 'shubham', 'sharma', 0, 0, '2023-07-11 11:19:56.553270', 'jkl43@gmail.com', 'False', 'user', '1', '2023-07-11 11:19:44.631679', '2023-07-11 11:19:44.631679', 'False', '92f7c221', '89bdf4d8'),
-(93, '123', NULL, 0, 'jkl44', 'shubham', 'sharma', 0, 0, '2023-07-11 11:20:46.250913', 'jkl44@gmail.com', 'False', 'user', '1', '2023-07-11 11:20:35.002179', '2023-07-11 11:20:35.002179', 'False', '92f7c221', 'f179abe1'),
-(94, '123', NULL, 0, 'jkl45', 'shubham', 'sharma', 0, 0, '2023-07-11 11:22:23.936328', 'jkl45@gmail.com', 'False', 'user', '1', '2023-07-11 11:21:18.125107', '2023-07-11 11:21:18.125107', 'False', '92f7c221', '477c4058'),
-(95, '123', NULL, 0, 'jkl46', 'shubham', 'sharma', 0, 0, '2023-07-11 11:22:58.113497', 'jkl46@gmail.com', 'False', 'user', '1', '2023-07-11 11:22:49.432975', '2023-07-11 11:22:49.432975', 'False', '92f7c221', '87bf52da'),
-(96, '123', NULL, 0, 'jkl47', 'shubham', 'sharma', 0, 0, '2023-07-11 11:23:37.210203', 'jkl47@gmail.com', 'False', 'user', '1', '2023-07-11 11:23:25.026363', '2023-07-11 11:23:25.026363', 'False', '92f7c221', '7a173c18'),
-(97, '123', NULL, 0, 'jkl48', 'shubham', 'sharma', 0, 0, '2023-07-11 11:24:17.001805', 'jkl48@gmail.com', 'False', 'user', '1', '2023-07-11 11:24:05.999771', '2023-07-11 11:24:05.999771', 'False', '92f7c221', '6f010b37'),
-(98, '123', NULL, 0, 'jkl49', 'shubham', 'sharma', 0, 0, '2023-07-11 11:25:28.912445', 'jkl49@gmail.com', 'False', 'user', '1', '2023-07-11 11:25:16.063508', '2023-07-11 11:25:16.063508', 'False', '92f7c221', '47c1b01f'),
-(99, '123', NULL, 0, 'jkl50', 'shubham', 'sharma', 0, 0, '2023-07-11 11:26:13.801519', 'jkl50@gmail.com', 'False', 'user', '1', '2023-07-11 11:25:57.914462', '2023-07-11 11:25:57.914462', 'False', '92f7c221', 'f2e146a9'),
-(100, '123', NULL, 0, 'jkl51', 'shubham', 'sharma', 0, 0, '2023-07-11 11:26:50.672789', 'jkl51@gmail.com', 'False', 'user', '1', '2023-07-11 11:26:39.445507', '2023-07-11 11:26:39.445507', 'False', '92f7c221', '6c490021'),
-(101, '123', NULL, 0, 'jkl52', 'shubham', 'sharma', 0, 0, '2023-07-11 11:27:13.117809', 'jkl52@gmail.com', 'False', 'user', '1', '2023-07-11 11:27:00.876862', '2023-07-11 11:27:00.876862', 'False', '92f7c221', '6f6d63d4'),
-(102, '123', NULL, 0, 'jkl54', 'shubham', 'sharma', 0, 0, '2023-07-12 04:55:39.975889', 'jkl54@gmail.com', 'False', 'user', '1', '2023-07-12 04:54:48.498564', '2023-07-12 04:54:48.498564', 'False', NULL, '65168f81'),
-(103, '123', NULL, 0, 'jkl56', 'shubham', 'sharma', 0, 0, '2023-07-12 05:01:41.937609', 'jkl56@gmail.com', 'True', 'user', '1', '2023-07-12 05:01:11.526360', '2023-07-12 05:01:11.526360', 'False', '92f7c221', '82313006'),
-(104, '123', NULL, 0, 'jkl57', 'shubham', 'sharma', 0, 0, '2023-07-12 05:07:25.466213', 'jkl57@gmail.com', 'False', 'user', '1', '2023-07-12 05:06:40.202805', '2023-07-12 05:06:40.202805', 'False', '92f7c221', 'f3faa4bf'),
-(105, '123', NULL, 0, 'jkl58', 'shubham', 'sharma', 0, 0, '2023-07-12 05:08:46.816699', 'jkl58@gmail.com', 'False', 'user', '1', '2023-07-12 05:08:34.229400', '2023-07-12 05:08:34.229400', 'False', '92f7c221', 'e9b47e36'),
-(106, '123', NULL, 0, 'jkl59', 'shubham', 'sharma', 0, 0, '2023-07-12 05:09:26.175193', 'jkl59@gmail.com', 'True', 'user', '1', '2023-07-12 05:09:17.105124', '2023-07-12 05:09:17.105124', 'False', '92f7c221', 'b7073002'),
-(107, '123', NULL, 0, 'jkl60', 'shubham', 'sharma', 0, 0, '2023-07-12 05:19:49.278007', 'jkl60@gmail.com', 'True', 'user', '1', '2023-07-12 05:17:59.142158', '2023-07-12 05:17:59.142158', 'False', '92f7c221', '0514c379'),
-(108, '123', NULL, 0, 'jkl61', 'shubham', 'sharma', 0, 0, '2023-07-12 05:27:27.686522', 'jkl61@gmail.com', 'True', 'user', '1', '2023-07-12 05:25:57.297587', '2023-07-12 05:25:57.297587', 'False', '92f7c221', '6526b308');
+INSERT INTO `users` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `is_staff`, `is_active`, `date_joined`, `email`, `verified_at`, `role`, `status`, `updated_at`, `created_at`, `remember_token`, `referal_by`, `referal_code`, `activation_date`, `paid_members`, `phone_no`, `business`, `farming_roi_status`, `level_income_status`, `staking_roi_status`) VALUES
+(1, 'pbkdf2_sha256$390000$BIkuyQi008rbk97NKMxDhk$9uO/Im7rbYmsx2NPsNzyGigf+865ysMeCNAl4TC5UUY=', NULL, 1, 'shubham', 'Shubham', 'Sharma', 1, 1, '2023-07-09 11:28:45.501935', 'shubhamboxfy@gmail.com', 'True', 'admin', '1', '2023-07-09 11:28:26.336200', '1691230283', '9568', NULL, 'b89735d6', 'N/A', 'True', NULL, '0', '1', '1', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `userstaking`
+--
+
+CREATE TABLE `userstaking` (
+  `id` bigint(20) NOT NULL,
+  `amount` varchar(200) NOT NULL,
+  `date` varchar(200) NOT NULL,
+  `status` varchar(200) NOT NULL,
+  `roi_per_month` varchar(200) NOT NULL,
+  `plan_id` bigint(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `roi_recieved` varchar(200) NOT NULL,
+  `expire_date` varchar(200) NOT NULL,
+  `next_date` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -603,15 +1391,11 @@ CREATE TABLE `user_rank` (
   `id` bigint(20) NOT NULL,
   `rank_id` bigint(20) NOT NULL,
   `user_id` bigint(20) NOT NULL,
-  `points` varchar(200) NOT NULL
+  `status` varchar(200) NOT NULL,
+  `date` varchar(200) NOT NULL,
+  `reward_recieved` varchar(200) NOT NULL,
+  `income` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `user_rank`
---
-
-INSERT INTO `user_rank` (`id`, `rank_id`, `user_id`, `points`) VALUES
-(1, 2, 31, '20');
 
 -- --------------------------------------------------------
 
@@ -623,83 +1407,23 @@ CREATE TABLE `user_referral` (
   `id` bigint(20) NOT NULL,
   `child_id_id` bigint(20) NOT NULL,
   `level_id` bigint(20) NOT NULL,
-  `parent_id_id` bigint(20) NOT NULL
+  `parent_id_id` bigint(20) NOT NULL,
+  `refferal_income` varchar(200) NOT NULL,
+  `date` varchar(100) NOT NULL,
+  `status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `user_referral`
+-- Table structure for table `verify`
 --
 
-INSERT INTO `user_referral` (`id`, `child_id_id`, `level_id`, `parent_id_id`) VALUES
-(24, 32, 1, 31),
-(25, 33, 1, 31),
-(26, 34, 1, 31),
-(27, 35, 1, 31),
-(28, 36, 1, 31),
-(29, 37, 1, 31),
-(30, 39, 1, 32),
-(31, 40, 1, 32),
-(32, 41, 1, 35),
-(33, 43, 1, 35),
-(36, 47, 1, 35),
-(37, 48, 1, 35),
-(38, 50, 1, 32),
-(39, 51, 1, 32),
-(40, 52, 1, 32),
-(41, 53, 1, 35),
-(42, 54, 1, 33),
-(43, 55, 1, 33),
-(44, 56, 1, 33),
-(45, 57, 1, 33),
-(46, 58, 1, 33),
-(47, 59, 1, 34),
-(48, 60, 1, 34),
-(49, 61, 1, 34),
-(50, 62, 1, 34),
-(51, 63, 1, 34),
-(52, 64, 1, 36),
-(53, 65, 1, 36),
-(54, 66, 1, 36),
-(55, 67, 1, 36),
-(56, 68, 1, 36),
-(57, 69, 1, 36),
-(58, 70, 1, 36),
-(59, 71, 1, 36),
-(60, 72, 1, 36),
-(61, 73, 1, 36),
-(62, 74, 1, 36),
-(63, 75, 1, 36),
-(64, 76, 1, 36),
-(65, 77, 1, 36),
-(66, 78, 1, 36),
-(67, 79, 1, 36),
-(68, 80, 1, 36),
-(69, 81, 1, 36),
-(70, 82, 1, 36),
-(71, 83, 1, 36),
-(72, 84, 1, 36),
-(73, 85, 1, 36),
-(74, 86, 1, 36),
-(75, 87, 1, 36),
-(76, 88, 1, 36),
-(77, 89, 1, 36),
-(78, 90, 1, 36),
-(79, 91, 1, 36),
-(80, 92, 1, 36),
-(81, 93, 1, 36),
-(82, 94, 1, 36),
-(83, 95, 1, 36),
-(84, 96, 1, 36),
-(85, 97, 1, 36),
-(86, 98, 1, 36),
-(87, 99, 1, 36),
-(88, 100, 1, 36),
-(89, 101, 1, 36),
-(90, 104, 1, 36),
-(91, 105, 1, 36),
-(92, 106, 1, 36),
-(93, 107, 1, 36),
-(94, 108, 1, 36);
+CREATE TABLE `verify` (
+  `start` varchar(200) NOT NULL,
+  `sr` int(11) NOT NULL,
+  `id` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -711,93 +1435,36 @@ CREATE TABLE `wallet` (
   `id` bigint(20) NOT NULL,
   `avaliable_balance` varchar(200) NOT NULL,
   `freezed_balance` varchar(200) NOT NULL,
-  `user_id` bigint(20) NOT NULL
+  `user_id` bigint(20) NOT NULL,
+  `reserved_balance` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `wallet`
 --
 
-INSERT INTO `wallet` (`id`, `avaliable_balance`, `freezed_balance`, `user_id`) VALUES
-(1, '0', '0', 1),
-(26, '0', '0', 29),
-(27, '0', '0', 31),
-(28, '0', '0', 32),
-(29, '0', '0', 33),
-(30, '0', '0', 34),
-(31, '0', '0', 35),
-(32, '0', '0', 36),
-(33, '0', '0', 37),
-(34, '0', '0', 39),
-(35, '0', '0', 40),
-(36, '0', '0', 41),
-(37, '0', '0', 43),
-(40, '0', '0', 47),
-(41, '0', '0', 48),
-(42, '0', '0', 49),
-(43, '0', '0', 50),
-(44, '0', '0', 51),
-(45, '0', '0', 52),
-(46, '0', '0', 53),
-(47, '0', '0', 54),
-(48, '0', '0', 55),
-(49, '0', '0', 56),
-(50, '0', '0', 57),
-(51, '0', '0', 58),
-(52, '0', '0', 59),
-(53, '0', '0', 60),
-(54, '0', '0', 61),
-(55, '0', '0', 62),
-(56, '0', '0', 63),
-(57, '0', '0', 64),
-(58, '0', '0', 65),
-(59, '0', '0', 66),
-(60, '0', '0', 67),
-(61, '0', '0', 68),
-(62, '0', '0', 69),
-(63, '0', '0', 70),
-(64, '0', '0', 71),
-(65, '0', '0', 72),
-(66, '0', '0', 73),
-(67, '0', '0', 74),
-(68, '0', '0', 75),
-(69, '0', '0', 76),
-(70, '0', '0', 77),
-(71, '0', '0', 78),
-(72, '0', '0', 79),
-(73, '0', '0', 80),
-(74, '0', '0', 81),
-(75, '0', '0', 82),
-(76, '0', '0', 83),
-(77, '0', '0', 84),
-(78, '0', '0', 85),
-(79, '0', '0', 86),
-(80, '0', '0', 87),
-(81, '0', '0', 88),
-(82, '0', '0', 89),
-(83, '0', '0', 90),
-(84, '0', '0', 91),
-(85, '0', '0', 92),
-(86, '0', '0', 93),
-(87, '0', '0', 94),
-(88, '0', '0', 95),
-(89, '0', '0', 96),
-(90, '0', '0', 97),
-(91, '0', '0', 98),
-(92, '0', '0', 99),
-(93, '0', '0', 100),
-(94, '0', '0', 101),
-(95, '0', '0', 102),
-(96, '0', '0', 103),
-(97, '0', '0', 104),
-(98, '0', '0', 105),
-(99, '0', '0', 106),
-(100, '0', '0', 107),
-(101, '0', '0', 108);
+INSERT INTO `wallet` (`id`, `avaliable_balance`, `freezed_balance`, `user_id`, `reserved_balance`) VALUES
+(1, '520.0', '0', 1, '0');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `account_emailaddress`
+--
+ALTER TABLE `account_emailaddress`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD KEY `account_emailaddress_user_id_2c513194_fk_users_id` (`user_id`);
+
+--
+-- Indexes for table `account_emailconfirmation`
+--
+ALTER TABLE `account_emailconfirmation`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `key` (`key`),
+  ADD KEY `account_emailconfirm_email_address_id_5b7f8c58_fk_account_e` (`email_address_id`);
 
 --
 -- Indexes for table `auth_group`
@@ -822,6 +1489,49 @@ ALTER TABLE `auth_permission`
   ADD UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`);
 
 --
+-- Indexes for table `core_appsettings`
+--
+ALTER TABLE `core_appsettings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `core_businesslogs`
+--
+ALTER TABLE `core_businesslogs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `core_businesslogs_child_id_id_b59cae4f_fk_users_id` (`child_id_id`),
+  ADD KEY `core_businesslogs_parent_id_id_b1d7e131_fk_users_id` (`parent_id_id`),
+  ADD KEY `core_businesslogs_plan_id_3e9a372a_fk_core_plansmodel_id` (`plan_id`);
+
+--
+-- Indexes for table `core_cofounderclub`
+--
+ALTER TABLE `core_cofounderclub`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `core_cofounderclub_club_98d70073_uniq` (`club`);
+
+--
+-- Indexes for table `core_emailservice`
+--
+ALTER TABLE `core_emailservice`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `core_gallaryimages`
+--
+ALTER TABLE `core_gallaryimages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `core_levelincome`
+--
+ALTER TABLE `core_levelincome`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `core_levelincome_child_id_id_fefd5568_fk_users_id` (`child_id_id`),
+  ADD KEY `core_levelincome_level_id_7df4ee2f_fk_levels_id` (`level_id`),
+  ADD KEY `core_levelincome_parent_id_id_479ecada_fk_users_id` (`parent_id_id`);
+
+--
 -- Indexes for table `core_login_history`
 --
 ALTER TABLE `core_login_history`
@@ -829,11 +1539,81 @@ ALTER TABLE `core_login_history`
   ADD KEY `core_login_history_user_id_c539e665_fk_users_id` (`user_id`);
 
 --
+-- Indexes for table `core_membership`
+--
+ALTER TABLE `core_membership`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `core_membership_plan_id_6cd5aba6_fk_core_plansmodel_id` (`plan_id`);
+
+--
+-- Indexes for table `core_newsmodel`
+--
+ALTER TABLE `core_newsmodel`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `core_plansmodel`
+--
+ALTER TABLE `core_plansmodel`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
+
+--
 -- Indexes for table `core_status_activity`
 --
 ALTER TABLE `core_status_activity`
   ADD PRIMARY KEY (`id`),
   ADD KEY `core_status_activity_user_id_b539cf0e_fk_users_id` (`user_id`);
+
+--
+-- Indexes for table `core_ticketmodel`
+--
+ALTER TABLE `core_ticketmodel`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `core_ticketmodel_user_id_fca908b3_fk_users_id` (`user_id`);
+
+--
+-- Indexes for table `core_useraddressdetail`
+--
+ALTER TABLE `core_useraddressdetail`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `core_useraddressdetail_user_id_46d53d92_fk_users_id` (`user_id`);
+
+--
+-- Indexes for table `core_usercofounderclub`
+--
+ALTER TABLE `core_usercofounderclub`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `core_usercofounderclub_club_id_a4ccc2a7_fk_core_cofounderclub_id` (`club_id`),
+  ADD KEY `core_usercofounderclub_user_id_20907c22_fk_users_id` (`user_id`);
+
+--
+-- Indexes for table `core_userunlockedlevel`
+--
+ALTER TABLE `core_userunlockedlevel`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `core_userunlockedlevel_level_id_74f0feac_fk_levels_id` (`level_id`),
+  ADD KEY `core_userunlockedlevel_user_id_e700a745_fk_users_id` (`user_id`);
+
+--
+-- Indexes for table `core_userwithdrawls`
+--
+ALTER TABLE `core_userwithdrawls`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `core_userwithdrawls_user_id_6b158a41_fk_users_id` (`user_id`),
+  ADD KEY `core_userwithdrawls_wallet_id_665943e6_fk_wallet_id` (`wallet_id`);
+
+--
+-- Indexes for table `core_withdrawsettingmodel`
+--
+ALTER TABLE `core_withdrawsettingmodel`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `core_youtubevideo`
+--
+ALTER TABLE `core_youtubevideo`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `current_level`
@@ -871,10 +1651,44 @@ ALTER TABLE `django_session`
   ADD KEY `django_session_expire_date_a5c62663` (`expire_date`);
 
 --
+-- Indexes for table `farmingroilogs`
+--
+ALTER TABLE `farmingroilogs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `farmingroilogs_plan_id_d7c73c53_fk_usermembership_id` (`plan_id`),
+  ADD KEY `farmingroilogs_user_id_30b710b7_fk_users_id` (`user_id`);
+
+--
+-- Indexes for table `fastrackmodel`
+--
+ALTER TABLE `fastrackmodel`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fastrackmodel_left_child_id_c5a534e1_fk_users_id` (`left_child_id`),
+  ADD KEY `fastrackmodel_level_id_d2e9b62f_fk_levels_id` (`level_id`),
+  ADD KEY `fastrackmodel_parent_id_id_d034067a_fk_users_id` (`parent_id_id`),
+  ADD KEY `fastrackmodel_right_child_id_7bcc5d26_fk_users_id` (`right_child_id`),
+  ADD KEY `fastrackmodel_plan_id_6d585f9f_fk_core_membership_id` (`plan_id`);
+
+--
 -- Indexes for table `levels`
 --
 ALTER TABLE `levels`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `manageroi`
+--
+ALTER TABLE `manageroi`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ptransfer`
+--
+ALTER TABLE `ptransfer`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `core_ptransfer_child_id_id_e1f7f06e_fk_users_id` (`child_id_id`),
+  ADD KEY `core_ptransfer_user_id_id_6008cb53_fk_users_id` (`user_id_id`),
+  ADD KEY `core_ptransfer_wallet_id_a4dc1fed_fk_wallet_id` (`wallet_id`);
 
 --
 -- Indexes for table `rank`
@@ -884,11 +1698,90 @@ ALTER TABLE `rank`
   ADD UNIQUE KEY `rank` (`rank`);
 
 --
+-- Indexes for table `socialaccount_socialaccount`
+--
+ALTER TABLE `socialaccount_socialaccount`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `socialaccount_socialaccount_provider_uid_fc810c6e_uniq` (`provider`,`uid`),
+  ADD KEY `socialaccount_socialaccount_user_id_8146e70c_fk_users_id` (`user_id`);
+
+--
+-- Indexes for table `socialaccount_socialapp`
+--
+ALTER TABLE `socialaccount_socialapp`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `socialaccount_socialtoken`
+--
+ALTER TABLE `socialaccount_socialtoken`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `socialaccount_socialtoken_app_id_account_id_fca4e0ac_uniq` (`app_id`,`account_id`),
+  ADD KEY `socialaccount_social_account_id_951f210e_fk_socialacc` (`account_id`);
+
+--
+-- Indexes for table `social_auth_association`
+--
+ALTER TABLE `social_auth_association`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `social_auth_association_server_url_handle_078befa2_uniq` (`server_url`,`handle`);
+
+--
+-- Indexes for table `social_auth_code`
+--
+ALTER TABLE `social_auth_code`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `social_auth_code_email_code_801b2d02_uniq` (`email`,`code`),
+  ADD KEY `social_auth_code_code_a2393167` (`code`),
+  ADD KEY `social_auth_code_timestamp_176b341f` (`timestamp`);
+
+--
+-- Indexes for table `social_auth_nonce`
+--
+ALTER TABLE `social_auth_nonce`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `social_auth_nonce_server_url_timestamp_salt_f6284463_uniq` (`server_url`,`timestamp`,`salt`);
+
+--
+-- Indexes for table `social_auth_partial`
+--
+ALTER TABLE `social_auth_partial`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `social_auth_partial_token_3017fea3` (`token`),
+  ADD KEY `social_auth_partial_timestamp_50f2119f` (`timestamp`);
+
+--
+-- Indexes for table `social_auth_usersocialauth`
+--
+ALTER TABLE `social_auth_usersocialauth`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `social_auth_usersocialauth_provider_uid_e6b5e668_uniq` (`provider`,`uid`),
+  ADD KEY `social_auth_usersocialauth_user_id_17d28448_fk_users_id` (`user_id`),
+  ADD KEY `social_auth_usersocialauth_uid_796e51dc` (`uid`);
+
+--
+-- Indexes for table `stakingroilogs`
+--
+ALTER TABLE `stakingroilogs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `stakingroilogs_plan_id_cee1076a_fk_core_membership_id` (`plan_id`),
+  ADD KEY `stakingroilogs_user_id_4423f67b_fk_users_id` (`user_id`);
+
+--
 -- Indexes for table `transactions`
 --
 ALTER TABLE `transactions`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `transactions_wallet_id_ce705075_fk_wallet_id` (`wallet_id`);
+  ADD KEY `transactions_wallet_id_ce705075_fk_wallet_id` (`wallet_id`),
+  ADD KEY `transactions_user_id_766cc893_fk_users_id` (`user_id`);
+
+--
+-- Indexes for table `usermembership`
+--
+ALTER TABLE `usermembership`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `core_usermembership_plan_id_063bcaed_fk_core_membership_id` (`plan_id`),
+  ADD KEY `core_usermembership_user_id_dfa7c16b_fk_users_id` (`user_id`);
 
 --
 -- Indexes for table `users`
@@ -897,6 +1790,14 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`),
   ADD UNIQUE KEY `referal_code` (`referal_code`);
+
+--
+-- Indexes for table `userstaking`
+--
+ALTER TABLE `userstaking`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `userstaking_plan_id_ab8536dc_fk_core_membership_id` (`plan_id`),
+  ADD KEY `userstaking_user_id_4c06ca72_fk_users_id` (`user_id`);
 
 --
 -- Indexes for table `users_groups`
@@ -932,6 +1833,13 @@ ALTER TABLE `user_referral`
   ADD KEY `user_referral_parent_id_id_5df4353f_fk_users_id` (`parent_id_id`);
 
 --
+-- Indexes for table `verify`
+--
+ALTER TABLE `verify`
+  ADD PRIMARY KEY (`sr`),
+  ADD KEY `verify_id_3bbf7b17_fk_users_id` (`id`);
+
+--
 -- Indexes for table `wallet`
 --
 ALTER TABLE `wallet`
@@ -941,6 +1849,18 @@ ALTER TABLE `wallet`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `account_emailaddress`
+--
+ALTER TABLE `account_emailaddress`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `account_emailconfirmation`
+--
+ALTER TABLE `account_emailconfirmation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `auth_group`
@@ -958,25 +1878,121 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
+
+--
+-- AUTO_INCREMENT for table `core_appsettings`
+--
+ALTER TABLE `core_appsettings`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `core_businesslogs`
+--
+ALTER TABLE `core_businesslogs`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `core_cofounderclub`
+--
+ALTER TABLE `core_cofounderclub`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `core_emailservice`
+--
+ALTER TABLE `core_emailservice`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `core_gallaryimages`
+--
+ALTER TABLE `core_gallaryimages`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `core_levelincome`
+--
+ALTER TABLE `core_levelincome`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `core_login_history`
 --
 ALTER TABLE `core_login_history`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=224;
+
+--
+-- AUTO_INCREMENT for table `core_membership`
+--
+ALTER TABLE `core_membership`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `core_newsmodel`
+--
+ALTER TABLE `core_newsmodel`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `core_plansmodel`
+--
+ALTER TABLE `core_plansmodel`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `core_status_activity`
 --
 ALTER TABLE `core_status_activity`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+
+--
+-- AUTO_INCREMENT for table `core_ticketmodel`
+--
+ALTER TABLE `core_ticketmodel`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `core_useraddressdetail`
+--
+ALTER TABLE `core_useraddressdetail`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `core_usercofounderclub`
+--
+ALTER TABLE `core_usercofounderclub`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `core_userunlockedlevel`
+--
+ALTER TABLE `core_userunlockedlevel`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `core_userwithdrawls`
+--
+ALTER TABLE `core_userwithdrawls`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `core_withdrawsettingmodel`
+--
+ALTER TABLE `core_withdrawsettingmodel`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `core_youtubevideo`
+--
+ALTER TABLE `core_youtubevideo`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `current_level`
 --
 ALTER TABLE `current_level`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
 
 --
 -- AUTO_INCREMENT for table `django_admin_log`
@@ -988,37 +2004,127 @@ ALTER TABLE `django_admin_log`
 -- AUTO_INCREMENT for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
+
+--
+-- AUTO_INCREMENT for table `farmingroilogs`
+--
+ALTER TABLE `farmingroilogs`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `fastrackmodel`
+--
+ALTER TABLE `fastrackmodel`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `levels`
 --
 ALTER TABLE `levels`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+
+--
+-- AUTO_INCREMENT for table `manageroi`
+--
+ALTER TABLE `manageroi`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `ptransfer`
+--
+ALTER TABLE `ptransfer`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `rank`
 --
 ALTER TABLE `rank`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `socialaccount_socialaccount`
+--
+ALTER TABLE `socialaccount_socialaccount`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `socialaccount_socialapp`
+--
+ALTER TABLE `socialaccount_socialapp`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `socialaccount_socialtoken`
+--
+ALTER TABLE `socialaccount_socialtoken`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `social_auth_association`
+--
+ALTER TABLE `social_auth_association`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `social_auth_code`
+--
+ALTER TABLE `social_auth_code`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `social_auth_nonce`
+--
+ALTER TABLE `social_auth_nonce`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `social_auth_partial`
+--
+ALTER TABLE `social_auth_partial`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `social_auth_usersocialauth`
+--
+ALTER TABLE `social_auth_usersocialauth`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `stakingroilogs`
+--
+ALTER TABLE `stakingroilogs`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `usermembership`
+--
+ALTER TABLE `usermembership`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
+
+--
+-- AUTO_INCREMENT for table `userstaking`
+--
+ALTER TABLE `userstaking`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users_groups`
@@ -1042,17 +2148,35 @@ ALTER TABLE `user_rank`
 -- AUTO_INCREMENT for table `user_referral`
 --
 ALTER TABLE `user_referral`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+
+--
+-- AUTO_INCREMENT for table `verify`
+--
+ALTER TABLE `verify`
+  MODIFY `sr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `wallet`
 --
 ALTER TABLE `wallet`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `account_emailaddress`
+--
+ALTER TABLE `account_emailaddress`
+  ADD CONSTRAINT `account_emailaddress_user_id_2c513194_fk_users_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `account_emailconfirmation`
+--
+ALTER TABLE `account_emailconfirmation`
+  ADD CONSTRAINT `account_emailconfirm_email_address_id_5b7f8c58_fk_account_e` FOREIGN KEY (`email_address_id`) REFERENCES `account_emailaddress` (`id`);
 
 --
 -- Constraints for table `auth_group_permissions`
@@ -1068,16 +2192,71 @@ ALTER TABLE `auth_permission`
   ADD CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`);
 
 --
+-- Constraints for table `core_businesslogs`
+--
+ALTER TABLE `core_businesslogs`
+  ADD CONSTRAINT `core_businesslogs_child_id_id_b59cae4f_fk_users_id` FOREIGN KEY (`child_id_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `core_businesslogs_parent_id_id_b1d7e131_fk_users_id` FOREIGN KEY (`parent_id_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `core_businesslogs_plan_id_3e9a372a_fk_core_plansmodel_id` FOREIGN KEY (`plan_id`) REFERENCES `core_plansmodel` (`id`);
+
+--
+-- Constraints for table `core_levelincome`
+--
+ALTER TABLE `core_levelincome`
+  ADD CONSTRAINT `core_levelincome_child_id_id_fefd5568_fk_users_id` FOREIGN KEY (`child_id_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `core_levelincome_level_id_7df4ee2f_fk_levels_id` FOREIGN KEY (`level_id`) REFERENCES `levels` (`id`),
+  ADD CONSTRAINT `core_levelincome_parent_id_id_479ecada_fk_users_id` FOREIGN KEY (`parent_id_id`) REFERENCES `users` (`id`);
+
+--
 -- Constraints for table `core_login_history`
 --
 ALTER TABLE `core_login_history`
   ADD CONSTRAINT `core_login_history_user_id_c539e665_fk_users_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
+-- Constraints for table `core_membership`
+--
+ALTER TABLE `core_membership`
+  ADD CONSTRAINT `core_membership_plan_id_6cd5aba6_fk_core_plansmodel_id` FOREIGN KEY (`plan_id`) REFERENCES `core_plansmodel` (`id`);
+
+--
 -- Constraints for table `core_status_activity`
 --
 ALTER TABLE `core_status_activity`
   ADD CONSTRAINT `core_status_activity_user_id_b539cf0e_fk_users_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `core_ticketmodel`
+--
+ALTER TABLE `core_ticketmodel`
+  ADD CONSTRAINT `core_ticketmodel_user_id_fca908b3_fk_users_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `core_useraddressdetail`
+--
+ALTER TABLE `core_useraddressdetail`
+  ADD CONSTRAINT `core_useraddressdetail_user_id_46d53d92_fk_users_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `core_usercofounderclub`
+--
+ALTER TABLE `core_usercofounderclub`
+  ADD CONSTRAINT `core_usercofounderclub_club_id_a4ccc2a7_fk_core_cofounderclub_id` FOREIGN KEY (`club_id`) REFERENCES `core_cofounderclub` (`id`),
+  ADD CONSTRAINT `core_usercofounderclub_user_id_20907c22_fk_users_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `core_userunlockedlevel`
+--
+ALTER TABLE `core_userunlockedlevel`
+  ADD CONSTRAINT `core_userunlockedlevel_level_id_74f0feac_fk_levels_id` FOREIGN KEY (`level_id`) REFERENCES `levels` (`id`),
+  ADD CONSTRAINT `core_userunlockedlevel_user_id_e700a745_fk_users_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `core_userwithdrawls`
+--
+ALTER TABLE `core_userwithdrawls`
+  ADD CONSTRAINT `core_userwithdrawls_user_id_6b158a41_fk_users_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `core_userwithdrawls_wallet_id_665943e6_fk_wallet_id` FOREIGN KEY (`wallet_id`) REFERENCES `wallet` (`id`);
 
 --
 -- Constraints for table `current_level`
@@ -1093,10 +2272,76 @@ ALTER TABLE `django_admin_log`
   ADD CONSTRAINT `django_admin_log_user_id_c564eba6_fk_users_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
+-- Constraints for table `farmingroilogs`
+--
+ALTER TABLE `farmingroilogs`
+  ADD CONSTRAINT `farmingroilogs_plan_id_d7c73c53_fk_usermembership_id` FOREIGN KEY (`plan_id`) REFERENCES `usermembership` (`id`),
+  ADD CONSTRAINT `farmingroilogs_user_id_30b710b7_fk_users_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `fastrackmodel`
+--
+ALTER TABLE `fastrackmodel`
+  ADD CONSTRAINT `fastrackmodel_left_child_id_c5a534e1_fk_users_id` FOREIGN KEY (`left_child_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `fastrackmodel_level_id_d2e9b62f_fk_levels_id` FOREIGN KEY (`level_id`) REFERENCES `levels` (`id`),
+  ADD CONSTRAINT `fastrackmodel_parent_id_id_d034067a_fk_users_id` FOREIGN KEY (`parent_id_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `fastrackmodel_plan_id_6d585f9f_fk_core_membership_id` FOREIGN KEY (`plan_id`) REFERENCES `core_membership` (`id`),
+  ADD CONSTRAINT `fastrackmodel_right_child_id_7bcc5d26_fk_users_id` FOREIGN KEY (`right_child_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `ptransfer`
+--
+ALTER TABLE `ptransfer`
+  ADD CONSTRAINT `core_ptransfer_child_id_id_e1f7f06e_fk_users_id` FOREIGN KEY (`child_id_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `core_ptransfer_user_id_id_6008cb53_fk_users_id` FOREIGN KEY (`user_id_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `core_ptransfer_wallet_id_a4dc1fed_fk_wallet_id` FOREIGN KEY (`wallet_id`) REFERENCES `wallet` (`id`);
+
+--
+-- Constraints for table `socialaccount_socialaccount`
+--
+ALTER TABLE `socialaccount_socialaccount`
+  ADD CONSTRAINT `socialaccount_socialaccount_user_id_8146e70c_fk_users_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `socialaccount_socialtoken`
+--
+ALTER TABLE `socialaccount_socialtoken`
+  ADD CONSTRAINT `socialaccount_social_account_id_951f210e_fk_socialacc` FOREIGN KEY (`account_id`) REFERENCES `socialaccount_socialaccount` (`id`),
+  ADD CONSTRAINT `socialaccount_social_app_id_636a42d7_fk_socialacc` FOREIGN KEY (`app_id`) REFERENCES `socialaccount_socialapp` (`id`);
+
+--
+-- Constraints for table `social_auth_usersocialauth`
+--
+ALTER TABLE `social_auth_usersocialauth`
+  ADD CONSTRAINT `social_auth_usersocialauth_user_id_17d28448_fk_users_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `stakingroilogs`
+--
+ALTER TABLE `stakingroilogs`
+  ADD CONSTRAINT `stakingroilogs_plan_id_cee1076a_fk_core_membership_id` FOREIGN KEY (`plan_id`) REFERENCES `core_membership` (`id`),
+  ADD CONSTRAINT `stakingroilogs_user_id_4423f67b_fk_users_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
 -- Constraints for table `transactions`
 --
 ALTER TABLE `transactions`
+  ADD CONSTRAINT `transactions_user_id_766cc893_fk_users_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `transactions_wallet_id_ce705075_fk_wallet_id` FOREIGN KEY (`wallet_id`) REFERENCES `wallet` (`id`);
+
+--
+-- Constraints for table `usermembership`
+--
+ALTER TABLE `usermembership`
+  ADD CONSTRAINT `core_usermembership_plan_id_063bcaed_fk_core_membership_id` FOREIGN KEY (`plan_id`) REFERENCES `core_membership` (`id`),
+  ADD CONSTRAINT `core_usermembership_user_id_dfa7c16b_fk_users_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `userstaking`
+--
+ALTER TABLE `userstaking`
+  ADD CONSTRAINT `userstaking_plan_id_ab8536dc_fk_core_membership_id` FOREIGN KEY (`plan_id`) REFERENCES `core_membership` (`id`),
+  ADD CONSTRAINT `userstaking_user_id_4c06ca72_fk_users_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `users_groups`
@@ -1126,6 +2371,12 @@ ALTER TABLE `user_referral`
   ADD CONSTRAINT `user_referral_child_id_id_de75dad4_fk_users_id` FOREIGN KEY (`child_id_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `user_referral_level_id_8f3a91dd_fk_levels_id` FOREIGN KEY (`level_id`) REFERENCES `levels` (`id`),
   ADD CONSTRAINT `user_referral_parent_id_id_5df4353f_fk_users_id` FOREIGN KEY (`parent_id_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `verify`
+--
+ALTER TABLE `verify`
+  ADD CONSTRAINT `verify_id_3bbf7b17_fk_users_id` FOREIGN KEY (`id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `wallet`
